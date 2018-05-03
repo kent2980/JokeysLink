@@ -132,6 +132,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		out.println(uma1.getKishumei().replace("　", ""));
 		}catch(NullPointerException e){
 			e.printStackTrace();
+			e.getMessage();
 		}finally{
 			out.println("</div>");
 			out.println("</td>");
