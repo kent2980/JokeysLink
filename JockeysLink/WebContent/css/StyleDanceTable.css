@@ -1,0 +1,225 @@
+﻿@charset "UTF-8";
+
+/*ページ全体のスタイル*/
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Rounded Mplus 1c";
+	background-image: url(/JockeysLink/picture/backimage_001.png);
+	background-image: url(../picture/backimage_001.png);
+}
+
+/**********************************************************************************
+*********************************タイトルバー***************************************
+***********************************************************************************/
+
+#raceData header {
+		font-weight: bold;
+		width: 1080px;
+		height: 160px;
+		margin: 0 auto;
+		margin-top: 30px;
+}
+
+/*【開催年月日・開催回次・競馬場・開催日次】*/
+
+#raceData .kaisaiJoho{
+	font-size: 18px;
+	margin 15-10-10-15;
+}
+
+/*【レース番号・競争名・グレード】*/
+
+#raceData .kyosoName {
+	font-size: 35px;
+}
+
+#raceData .kyosoName::before {
+ font-family: "Font Awesome 5 Free";
+	content: "\f075";
+	color: #dfeca6;
+	font-size: 60px;
+}
+
+/*【競争条件・競争記号・重量種別】*/
+
+#raceData .kyosoShubetsu{
+font-size: 16px;
+float: right;
+}
+
+/*【距離・トラック・発送時刻・天候・馬場状態】*/
+
+#raceData .kyosoJoho{
+	font-size: 16px;
+	text-align:right;
+}
+
+/************************出馬表テーブル********************************/
+
+/****テーブルの幅を設定する****/
+#raceData .umaData  {
+	font-size: 12px;
+	line-height: 1.2;
+	width: 1280px;
+	margin: 0 auto;
+	margin-bottom: 40px;
+	border-spacing: 0;
+	border-collapse: collapse;
+	box-shadow: 1px 1px 8px #2a2a2a;
+	background-color: #e9f0f4;
+}
+
+/****ヘッダーの背景を設定する****/
+#raceData .umaData th {
+		background: #dadadb;
+		height: 30px;
+		border: 1px solid #ffffff;
+		box-shadow: 2px 2px 4px rgb(0,0,0);
+}
+
+/****左端のヘッダーセルを角丸にする****/
+#raceData .umaData th:first-child {
+	-moz-border-radius: 6px 0 0 0;
+	-webkit-border-radius: 6px 0 0 0;
+	border-radius: 6px 0 0 0;
+}
+
+/****右端のヘッダーセルを角丸にする****/
+#raceData .umaData th:last-child {
+	-moz-border-radius: 0 6px 0 0;
+	-webkit-border-radius: 0 6px 0 0;
+	border-radius: 0 6px 0 0;
+}
+
+/****セルの奇数行を設定する****/
+#raceData  tr:nth-child(odd)  {
+	background-color: #ffffff;
+}
+
+/****セルの偶数行を設定する****/
+#raceData .umaData tr:nth-child(even) td {
+
+}
+
+/****ホバー時の背景を設定する****/
+#raceData .umaData tr:hover {
+	background:  rgba(228, 130, 94, 0.62);
+	-o-transition: all 0.1s ease-in-out;
+	-webkit-transition: all 0.1s ease-in-out;
+	-moz-transition: all 0.1s ease-in-out;
+	-ms-transition: all 0.1s ease-in-out;
+	transition:  all 0.1s ease-in-out;
+}
+
+/****セルのボーダーを設定する****/
+#raceData .umaData td {
+	height: 90px;
+	border: 0.5px solid rgb(0,0,0);
+}
+
+/*セルの幅を設定する*/
+
+#raceData .bango {
+	font-size: 20px;
+	font-weight: 500;
+	text-align: center;
+	width:28px;
+}
+
+#raceData .bamei {
+	width: 200px;
+	padding: 0px 10px 0px 10px;
+}
+
+#raceData .kakoso {
+	font-size: 11px;
+	line-height: 1.5;
+	padding-left: 5px;
+}
+
+/****セルの中身の設定****/
+
+#raceData .umaData .bamei .name {
+	font-size: 18px;
+	font-weight: 800;
+}
+
+#raceData .umaData .bamei .chakujun {
+	font-size: 16px;
+	font-weight: 600;
+	color: #313333;
+	float: right;
+	text-align: right;
+}
+
+#raceData .umaData .kakoso .chakujun {
+	font-size: 15px;
+	font-weight: 600;
+	color: #313333;
+	padding-right: 3px;
+}
+
+#raceData .srun {
+	float: right;
+	text-align: right;
+	padding-right: 6px;
+	line-height: 0;
+	font-size: 17px;
+	font-weight: 800;
+	color: #313333;
+	text-shadow: 0 2px 6px #878786;
+}
+
+/****枠番で色を設定する****/
+
+#raceData .umaData .wakuColor1 {
+}
+
+#raceData .umaData .wakuColor2 {
+	background-color: #000000;
+	color: #ffffff;
+}
+
+#raceData .umaData .wakuColor3 {
+	background-color: #e74a24;
+	color: #ffffff;
+}
+
+#raceData .umaData .wakuColor4 {
+	background-color: #2671de;
+	color: #ffffff;
+}
+
+#raceData .umaData .wakuColor5 {
+	background-color: #ecf619;
+}
+
+#raceData .umaData .wakuColor6 {
+	background-color: #1de243;
+	color: #ffffff;
+}
+
+#raceData .umaData .wakuColor7 {
+	background-color: #e4b527;
+}
+
+#raceData .umaData .wakuColor8 {
+	background-color: #ed52a4;
+}
+
+/****srunの設定****/
+
+.srunSmall {
+	color: #f63737;
+	text-shadow: 0 2px 6px #e9998a;
+}
+
+/****未出走***/
+
+.kakosoError {
+	padding: auto auto auto auto;
+	text-align: center;
+	font-size: 20px;
+}
