@@ -10,7 +10,7 @@
 <%
 RaceDataSet raceData = (RaceDataSet) request.getAttribute("raceData");
 List<UmagotoDataSet> umaList1 = UtilClass.AutoCast(request.getAttribute("umaList"));
-List<Map<Integer,UmagotoDataSet>> map = UtilClass.AutoCast(request.getAttribute("umaMap"));
+List<Map<String,UmagotoDataSet>> map = UtilClass.AutoCast(request.getAttribute("umaMap"));
 PrintWriter pw = response.getWriter();
 String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				?raceData.getKyosomeiHondai()
@@ -27,11 +27,11 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 </head>
 <body id="raceData">
 
-<header> 
+<header>
 <!-- ***********************【開催年月日・開催回次・競馬場・開催日次・レース番号】**********************************-->
 
 <div class="kaisaiJoho">
-	<% 
+	<%
 	out.println(raceData.getKaisaiNenGappi());
 	out.println(raceData.getKaisaiKaiji() + raceData.getKeibajo() + raceData.getKaisaiNichiji());
 	out.println(raceData.getRaceBango() + "R");
@@ -98,20 +98,21 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 	}
 	%>
 	</tr>
-	
+
 <!-- **************【データ部】************* -->
 	<%
 	for(int i = 0; i < umaList1.size(); i++){
 		try{
 		UmagotoDataSet uma1 = umaList1.get(i);
-		
+
 		//出走データ
-		
+
 		out.println("<tr>");
 		out.println("<td class=\"bango wakuColor" + uma1.getWakuban() + "\">" + uma1.getWakuban() + "</td>");
 		out.println("<td class=\"bango\">" + uma1.getUmaban() + "</td>");
 		out.println("<td class=\"bamei\">");
 		out.println("<div>");
+		try{
 		out.println("<span class=\"name\">" + uma1.getBamei() + "</span>");
 		out.println("<span class=\"chakujun\">");
 		out.println(uma1.getKakuteiChakujun()>0?uma1.getKakuteiChakujun() + "着":"");
@@ -129,12 +130,16 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		out.println(uma1.getSeibetsu());
 		out.println(uma1.getFutanJuryo() + "kg");
 		out.println(uma1.getKishumei().replace("　", ""));
-		out.println("</div>");		
-		out.println("</td>");
-		
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}finally{
+			out.println("</div>");
+			out.println("</td>");
+		}
+
 		//過去走データ
 		for(int t = 0; t<map.size();t++){
-			UmagotoDataSet uma = map.get(t).get(uma1.getUmaGroup());
+			UmagotoDataSet uma = map.get(t).get(uma1.getKettoTorokuBango());
 			out.println("<td class=\"kakoso\">");
 			try{
 				out.println("<span class=\"chakujun\">" + uma.getKakuteiChakujun() + "着</span>");

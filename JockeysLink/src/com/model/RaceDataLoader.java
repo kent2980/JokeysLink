@@ -13,27 +13,27 @@ import com.pckeiba.umagoto.UmagotoDataSet;
 public class RaceDataLoader {
 	private final RaceDataSet rds;
 	private final List<UmagotoDataSet> umaList;
-	private final List<Map<Integer,UmagotoDataSet>> umaMapList;
+	private final List<Map<String,UmagotoDataSet>> umaMapList;
 	private final UmagotoDataLoad umaLoad;
-	    
+
 	/**
 	 * コンストラクタ<br>レースコードで指定されたレースデータをダウンロードします。
 	 * @param raceCode レースコード
 	 * @param hit 過去走レース数
 	 */
 	public RaceDataLoader(String raceCode, int hit) {
-		
+
 		hit++;
 		//レース詳細データをダウンロードする
 		RaceDataLoad raceLoad = new RaceDataLoad(raceCode);
 		rds = raceLoad.getRaceDataSet();
-		
+
 		//馬毎データをダウンロードする
 		umaLoad = new UmagotoDataLoad(raceCode,hit);
 		umaList = umaLoad.getList().stream().filter(s -> s.getUmaID()==1).collect(Collectors.toList());
 		umaMapList = new ArrayList<>();
 		for(int i=2; i<=hit;i++) {
-			umaMapList.add(umaLoad.getMap(i));
+			umaMapList.add(umaLoad.getMapFromKettoTorokuBango(i));
 		}
 	}
 
@@ -44,7 +44,7 @@ public class RaceDataLoader {
 	public RaceDataSet getRaceDataSet() {
 		return rds;
 	}
-	
+
 	/**
 	 * 今走の馬毎詳細データのオブジェクトをリスト形式で返します。
 	 * @return 今走の馬毎詳細オブジェクトリスト
@@ -57,10 +57,10 @@ public class RaceDataLoader {
 	 * 過去走の馬毎データのオブジェクトをマップリスト形式で返します。
 	 * @return 過去走の馬毎詳細オブジェクトのマップリスト
 	 */
-	public List<Map<Integer, UmagotoDataSet>> getKakoRaceDataMapList() {
+	public List<Map<String, UmagotoDataSet>> getKakoRaceDataMapList() {
 		return umaMapList;
 	}
-	
+
 	/**
 	 * 指定された過去走データをマップ形式で返します。<br>マップのキーは今走の馬番です。
 	 * @param race 指定過去走

@@ -42,7 +42,7 @@ public class RaceSouceServlet extends HttpServlet {
 		RaceDataLoader loader = new RaceDataLoader(requestPara,4);
 		RaceDataSet raceData = loader.getRaceDataSet();
 		List<UmagotoDataSet> umaList = loader.getNowRaceDataList();
-		List<Map<Integer,UmagotoDataSet>> umaMap = loader.getKakoRaceDataMapList();
+		List<Map<String,UmagotoDataSet>> umaMap = loader.getKakoRaceDataMapList();
 
 		//各レース詳細オブジェクトをフォワードする
 		request.setAttribute("raceData", raceData);
