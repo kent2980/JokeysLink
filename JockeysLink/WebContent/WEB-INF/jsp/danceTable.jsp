@@ -127,15 +127,12 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		out.println("<br>");
 		out.println(uma1.getTanshoNinkijun() + "人気");
 		out.println(uma1.getTanshoOdds());
-		out.println(uma1.getSeibetsu() + uma1.getBarei());
-		out.println(uma1.getFutanJuryo() + "kg");
-		out.println(uma1.getKishumei().replace("　", ""));
 		}catch(NullPointerException e){
 			out.println("<br>");
+		}finally{
 			out.println(uma1.getSeibetsu() + uma1.getBarei());
 			out.println(uma1.getFutanJuryo() + "kg");
 			out.println(uma1.getKishumei().replace("　", ""));
-		}finally{
 			out.println("</div>");
 			out.println("</td>");
 		}
