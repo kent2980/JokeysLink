@@ -1,6 +1,7 @@
 package com.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,8 @@ public class RaceDataLoader implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private String raceCode;
+	private int hit;
 	private RaceDataSet rds;
 	private List<UmagotoDataSet> umaList;
 	private List<Map<String,UmagotoDataSet>> umaMapList;
@@ -25,12 +28,42 @@ public class RaceDataLoader implements Serializable{
 
 	public RaceDataLoader() {}
 
+	public RaceDataLoader(String raceCode, int hit) {
+		this.raceCode = raceCode;
+		this.hit = hit;
+		setRaceDataSet(raceCode,hit);
+	}
+
+	public String getRaceCode() {
+		return raceCode;
+	}
+
+	public void setRaceCode(String raceCode) {
+		this.raceCode = raceCode;
+		setRaceDataSet(raceCode,hit);
+	}
+
+	public int getHit() {
+		return hit;
+	}
+
+	public void setHit(int hit) {
+		this.hit = hit;
+		setRaceDataSet(raceCode,hit);
+	}
+
+	public void setRaceData(String raceCode, int hit) {
+		this.raceCode = raceCode;
+		this.hit = hit;
+		setRaceDataSet(raceCode,hit);
+	}
+
 	/**
 	 * コンストラクタ<br>レースコードで指定されたレースデータをダウンロードします。
 	 * @param raceCode レースコード
 	 * @param hit 過去走レース数
 	 */
-	public RaceDataLoader(String raceCode, int hit) {
+	public void setRaceDataSet(String raceCode, int hit) {
 
 		hit++;
 		//レース詳細データをダウンロードする
@@ -79,4 +112,5 @@ public class RaceDataLoader implements Serializable{
 		kakoRaceDataMap = umaLoad.getMap(++race);
 		return kakoRaceDataMap;
 	}
+
 }

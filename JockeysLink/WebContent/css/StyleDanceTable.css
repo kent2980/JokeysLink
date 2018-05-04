@@ -6,20 +6,74 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: "Rounded Mplus 1c";
-	background-image: url(/JockeysLink/picture/backimage_001.png);
-	background-image: url(../picture/backimage_001.png);
+	background-image: url(/JockeysLink/picture/backimage_003.png);
+	background-image: url(../picture/backimage_003.png);
 }
 
 /**********************************************************************************
 *********************************タイトルバー***************************************
 ***********************************************************************************/
 
-#raceData header {
+ header .headbar{
+	 top: 0;
+	 left: 0;
+	width: 100%;
+	position: fixed;
+	height: 10px;
+	background-color: #1d868a;
+	box-shadow: -2px -2px 2px #1da1a1 inset;
+	opacity: 0.8;
+	z-index: 2;
+}
+
+div.headbutton {
+	width:600px;
+	margin: 30px auto;
+}
+
+.headbutton a {
+position: relative;
+display: inline-block;
+padding: 4px 20px;
+text-decoration: none;
+background-color: #dfdfdf;
+color: #FFF;
+text-shadow: 2px 2px 4px #5e5e5e;
+border-bottom: solid 2px #6e6e6e;
+border-radius: 4px;
+box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 6px 6px 4px rgba(0,0,0,0,0.19);
+font-weight: 800;
+font-size:28px;
+}
+
+.headbutton .home a {
+	margin-right: 20px;
+	float: left;
+}
+
+.headbutton .schedule a {
+	margin-right: 20px;
+	float: left;
+}
+
+.headbutton .data a {
+	float: none;
+}
+.headbutton a:hover {
+	color: #424242;
+}
+
+.headbutton a:active {
+	color: #FFF;
+}
+
+#raceData .raceinfo {
 		font-weight: bold;
 		width: 1080px;
 		height: 160px;
 		margin: 0 auto;
-		margin-top: 30px;
+		margin-top: 0.5vw;
+		margin-bottom: 1vw;
 }
 
 /*【開催年月日・開催回次・競馬場・開催日次】*/
@@ -212,15 +266,118 @@ float: right;
 
 /****srunの設定****/
 
-.srunSmall {
+#raceData .srunSmall {
 	color: #f63737;
 	text-shadow: 0 2px 6px #e9998a;
 }
 
 /****未出走***/
 
-.kakosoError {
+#raceData .kakosoError {
 	padding: auto auto auto auto;
 	text-align: center;
 	font-size: 20px;
+}
+
+/************Index.html************/
+
+/****競馬場表示****/
+
+#index section.keibajo {
+	background-color: rgba(110, 34, 34, 0.48);
+	width: 1205px;
+	margin: 0 auto;
+}
+
+#index .kari {
+	position: absolute;
+	z-index: 2;
+}
+
+#index .keibajo0 {
+	padding-left: 160px;
+	font-size: 28px;
+	float: left;
+}
+
+#index .keibajo1 {
+	padding-left: 350px;
+	font-size: 28px;
+	float: left;
+}
+
+#index .keibajo2 {
+	padding-left: 970px;
+	font-size: 28px;
+}
+
+
+/****レースリスト****/
+
+#index .racebox {
+	z-index: 1;
+	width: 1205px;
+	margin: 40px auto;
+	height: 720px;
+	padding: 1vw 1vw;
+	background-color: #dfdfdf;
+	border-radius: 10px;
+	box-shadow: -2px -2px 10px #7e7e7e,4px 3px 10px;
+}
+
+#index .racebox a {
+	font-weight: 500;
+	color: #363636;
+	font-size: 16px;
+	line-height: 45px;
+	text-decoration: none;
+	text-shadow: 2px 2px 4px #dddddd inset;
+}
+
+#index .racebox a:hover {
+	color: #19599a;
+	font-weight: 800;
+	font-size: 17px;
+}
+
+#index .racebox a:active {
+	color: #363636;
+}
+
+#index .kaisai3 .keibajo0 {
+	height: 700px;
+	background-color: #fff;
+	box-shadow: 2px 2px 8px inset;
+	padding-top: 20px;
+	padding-left: 20px;
+	margin-right: 10px;
+	width: 375px;
+	float: left;
+}
+
+#index .kaisai3 .keibajo1 {
+	height: 700px;
+	background-color: #fff;
+	box-shadow: 2px 2px 8px inset;
+	padding-top: 20px;
+	padding-left: 20px;
+	margin-right: 10px;
+	width: 375px;
+	float: left;
+}
+
+#index .kaisai3 .keibajo2 {
+	height: 700px;
+	background-color: #fff;
+	box-shadow: 2px 2px 8px inset;
+	padding-top: 20px;
+	padding-left: 20px;
+	width: 375px;
+	float: left;
+}
+
+#index .kyosoinfo {
+	font-size: 11px;
+	line-height: 2px;
+	margin-bottom: 10px;
 }

@@ -22,12 +22,27 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+<link href="../css/StyleDanceTable.css" rel="stylesheet">
 <link href="/JockeysLink/css/StyleDanceTable.css" rel="stylesheet">
 <title><%= raceData.getKaisaiNenGappi() + " " + kyosoTitle %></title>
 </head>
 <body id="raceData">
-
 <header>
+<div class="headbar"></div>
+<div class="headbutton">
+	<div class="home">
+		<a href="/JockeysLink/index">Home</a>
+	</div>
+	<div class="schedule headbutton">
+		<a href="#">Schedule</a>
+	</div>
+	<div class="data headbutton">
+		<a href="#">Data</a>
+	</div>
+</div>
+</header>
+
+<div class="raceinfo">
 <!-- ***********************【開催年月日・開催回次・競馬場・開催日次・レース番号】**********************************-->
 
 <div class="kaisaiJoho">
@@ -62,6 +77,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 	out.println(raceData.getKyosoShubetsu());
 	out.println(raceData.getKyosoKigo());
 	out.println(raceData.getJuryoShubetsu());
+	out.println(raceData.getTorokuTosu() + "頭");
 	%>
 </span>
 
@@ -82,7 +98,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 <!-- *************************************************************************************
      ****************************ここから出馬表のテーブルを記述する********************************
      ************************************************************************************* -->
-</header>
+</div>
 
 <table class="umaData">
 
@@ -104,6 +120,10 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 	for(int i = 0; i < umaList1.size(); i++){
 		UmagotoDataSet uma1 = umaList1.get(i);
 
+		try{
+		if(!raceData.getDataKubun().equals(uma1.getDataKubun()))
+		throw new IllegalArgumentException();
+
 		//出走データ
 
 		out.println("<tr>");
@@ -124,16 +144,19 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		try{
 			out.println(uma1.getZogensa().length()>0?uma1.getBataiju() + "kg(" + uma1.getZogensa() + ")":"");
 			out.println("<br>");
-			out.println(uma1.getTanshoNinkijun() + "人気");
-			out.println(uma1.getTanshoOdds());
 		}catch(NullPointerException e){
 			out.println("<br>");
 		}finally{
-			out.println(uma1.getSeibetsu() + uma1.getBarei());
-			out.println(uma1.getFutanJuryo() + "kg");
-			out.println(uma1.getKishumei().replace("　", ""));
-			out.println("</div>");
-			out.println("</td>");
+			try{
+				out.println(uma1.getTanshoNinkijun() + "人気");
+				out.println(uma1.getTanshoOdds());
+			}finally{
+				out.println(uma1.getSeibetsu() + uma1.getBarei());
+				out.println(uma1.getFutanJuryo() + "kg");
+				out.println(uma1.getKishumei().replace("　", ""));
+				out.println("</div>");
+				out.println("</td>");
+			}
 		}
 		//過去走データ
 		try{
@@ -187,6 +210,9 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 	}
 		//ここまで
 		out.println("</tr>");
+	}catch(IllegalArgumentException e){
+		e.printStackTrace();
+	}
 	}
 	%>
 </table>

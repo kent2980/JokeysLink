@@ -21,7 +21,8 @@ import com.pckeiba.umagoto.UmagotoDataSet;
  */
 @WebServlet("/Race")
 public class RaceSouceServlet extends HttpServlet {
-	RaceDataLoader loader;
+	private RaceDataLoader loader;
+
 	@Override
 	public void destroy() {
 		// TODO 自動生成されたメソッド・スタブ
@@ -32,6 +33,7 @@ public class RaceSouceServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// TODO 自動生成されたメソッド・スタブ
 		super.init(config);
+		loader = new RaceDataLoader();
 	}
 
 	private static final long serialVersionUID = 1L;
@@ -51,7 +53,7 @@ public class RaceSouceServlet extends HttpServlet {
 
 		//URLパラメータからレースコードを取得する
 		String requestPara = request.getParameter("racecode");
-		loader = new RaceDataLoader(requestPara,4);
+		loader.setRaceData(requestPara,4);
 		//各レース詳細オブジェクトを取得する
 		RaceDataSet raceData = loader.getRaceDataSet();
 		List<UmagotoDataSet> umaList = loader.getNowRaceDataList();
