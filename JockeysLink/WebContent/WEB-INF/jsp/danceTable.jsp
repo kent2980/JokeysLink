@@ -102,7 +102,6 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 <!-- **************【データ部】************* -->
 	<%
 	for(int i = 0; i < umaList1.size(); i++){
-		try{
 		UmagotoDataSet uma1 = umaList1.get(i);
 
 		//出走データ
@@ -123,10 +122,10 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		out.println(uma1.getTozaiShozoku());
 		out.println(uma1.getChokyoshi().replace("　", ""));
 		try{
-		out.println(uma1.getZogensa().length()>0?uma1.getBataiju() + "kg(" + uma1.getZogensa() + ")":"");
-		out.println("<br>");
-		out.println(uma1.getTanshoNinkijun() + "人気");
-		out.println(uma1.getTanshoOdds());
+			out.println(uma1.getZogensa().length()>0?uma1.getBataiju() + "kg(" + uma1.getZogensa() + ")":"");
+			out.println("<br>");
+			out.println(uma1.getTanshoNinkijun() + "人気");
+			out.println(uma1.getTanshoOdds());
 		}catch(NullPointerException e){
 			out.println("<br>");
 		}finally{
@@ -136,12 +135,18 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 			out.println("</div>");
 			out.println("</td>");
 		}
-
 		//過去走データ
+		try{
 		for(int t = 0; t<map.size();t++){
 			UmagotoDataSet uma = map.get(t).get(uma1.getKettoTorokuBango());
+			if(t==0){
+				uma.toString();	//nullの場合は"初出走"
+			}
 			out.println("<td class=\"kakoso\">");
 			try{
+				String kakoKyosoTitle = uma.getKyosomeiRyakusho6().length()>0
+										?uma.getKyosomeiRyakusho6()
+										:uma.getKyosoShubetsu().substring(uma.getKyosoShubetsu().indexOf("系")+1, uma.getKyosoShubetsu().length()) + uma.getKyosoJoken();
 				out.println("<span class=\"chakujun\">" + uma.getKakuteiChakujun() + "着</span>");
 				out.println(uma.getKaisaiKaiji() + uma.getKeibajo() + uma.getKaisaiNichiji());
 				out.println(uma.getKaisaiNenGappi());
@@ -149,7 +154,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				out.println(uma.getKyori() + "m");
 				out.println("<br>");
 				String grade = uma.getGrade().length()==0?uma.getKyosoJoken():uma.getGrade().equals("特別競走")?uma.getKyosoJoken():uma.getGrade();
-				out.println(uma.getKyosomeiRyakusho6().length()>0?uma.getKyosomeiRyakusho6() + "(" + grade + ")":uma.getKyosoJoken());
+				out.println(kakoKyosoTitle);
 				out.println(uma.getKeibajo());
 				out.println(uma.getTenko());
 				out.println(uma.getShibaBabaJotai().length()>0?uma.getShibaBabaJotai():uma.getDirtBabaJotai());
