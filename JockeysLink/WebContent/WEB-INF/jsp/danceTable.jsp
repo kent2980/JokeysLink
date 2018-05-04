@@ -108,11 +108,10 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		//出走データ
 
 		out.println("<tr>");
-		out.println("<td class=\"bango wakuColor" + uma1.getWakuban() + "\">" + uma1.getWakuban() + "</td>");
-		out.println("<td class=\"bango\">" + uma1.getUmaban() + "</td>");
+		out.println(uma1.getDataKubun().equals("1")?"<td></td>":"<td class=\"bango wakuColor" + uma1.getWakuban() + "\">" + uma1.getWakuban() + "</td>");
+		out.println(uma1.getDataKubun().equals("1")?"<td></td>":"<td class=\"bango\">" + uma1.getUmaban() + "</td>");
 		out.println("<td class=\"bamei\">");
 		out.println("<div>");
-		try{
 		out.println("<span class=\"name\">" + uma1.getBamei() + "</span>");
 		out.println("<span class=\"chakujun\">");
 		out.println(uma1.getKakuteiChakujun()>0?uma1.getKakuteiChakujun() + "着":"");
@@ -123,15 +122,19 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		out.println("<br>");
 		out.println(uma1.getTozaiShozoku());
 		out.println(uma1.getChokyoshi().replace("　", ""));
+		try{
 		out.println(uma1.getZogensa().length()>0?uma1.getBataiju() + "kg(" + uma1.getZogensa() + ")":"");
 		out.println("<br>");
 		out.println(uma1.getTanshoNinkijun() + "人気");
 		out.println(uma1.getTanshoOdds());
-		out.println(uma1.getSeibetsu());
+		out.println(uma1.getSeibetsu() + uma1.getBarei());
 		out.println(uma1.getFutanJuryo() + "kg");
 		out.println(uma1.getKishumei().replace("　", ""));
 		}catch(NullPointerException e){
-			e.printStackTrace();
+			out.println("<br>");
+			out.println(uma1.getSeibetsu() + uma1.getBarei());
+			out.println(uma1.getFutanJuryo() + "kg");
+			out.println(uma1.getKishumei().replace("　", ""));
 		}finally{
 			out.println("</div>");
 			out.println("</td>");
@@ -150,18 +153,20 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				out.println("<br>");
 				String grade = uma.getGrade().length()==0?uma.getKyosoJoken():uma.getGrade().equals("特別競走")?uma.getKyosoJoken():uma.getGrade();
 				out.println(uma.getKyosomeiRyakusho6().length()>0?uma.getKyosomeiRyakusho6() + "(" + grade + ")":uma.getKyosoJoken());
-				out.println("<br>");
-				out.println(uma.getCorner1Juni() + "-" + uma.getCorner2Juni() + "-" + uma.getCorner3Juni() + "-" + uma.getCorner4Juni());
-				out.println(uma.getUmaban() + "番" + uma.getTanshoNinkijun() + "人");
+				out.println(uma.getKeibajo());
 				out.println(uma.getTenko());
 				out.println(uma.getShibaBabaJotai().length()>0?uma.getShibaBabaJotai():uma.getDirtBabaJotai());
+				out.println("<br>");
+				out.println(uma.getCorner1Juni() + "-" + uma.getCorner2Juni() + "-" + uma.getCorner3Juni() + "-" + uma.getCorner4Juni());
+				out.println(uma.getShussoTosu() + "頭" + uma.getUmaban() + "番" + uma.getTanshoNinkijun() + "人");
 				out.println("<span class=\"srun\">");
 				try{
 					out.println(uma.getSrun().doubleValue()>0?uma.getSrun().toString() + " pt":"<span class=\"srunSmall\">" + uma.getSrun() + " pt</span>");
 				}catch(NullPointerException e){
 					out.println("計測不能");
 				}
-				out.println("</span><br>");
+				out.println("</span>");
+				out.println("<br>");
 				out.println(uma.getSohaTime());
 				out.println(uma.getKohan3F());
 				out.println(uma.getBataiju() + "kg(" + uma.getZogensa() + ")");

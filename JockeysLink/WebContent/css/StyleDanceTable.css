@@ -164,6 +164,7 @@ float: right;
 #raceData .srun {
 	float: right;
 	text-align: right;
+	padding-top: 15px;
 	padding-right: 6px;
 	line-height: 0;
 	font-size: 17px;
