@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +21,21 @@ import com.pckeiba.umagoto.UmagotoDataSet;
  */
 @WebServlet("/Race")
 public class RaceSouceServlet extends HttpServlet {
+	RaceDataLoader loader;
+	@Override
+	public void destroy() {
+		// TODO 自動生成されたメソッド・スタブ
+		super.destroy();
+	}
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		// TODO 自動生成されたメソッド・スタブ
+		super.init(config);
+	}
+
 	private static final long serialVersionUID = 1L;
- 
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,9 +51,8 @@ public class RaceSouceServlet extends HttpServlet {
 
 		//URLパラメータからレースコードを取得する
 		String requestPara = request.getParameter("racecode");
-
+		loader = new RaceDataLoader(requestPara,4);
 		//各レース詳細オブジェクトを取得する
-		RaceDataLoader loader = new RaceDataLoader(requestPara,4);
 		RaceDataSet raceData = loader.getRaceDataSet();
 		List<UmagotoDataSet> umaList = loader.getNowRaceDataList();
 		List<Map<String,UmagotoDataSet>> umaMap = loader.getKakoRaceDataMapList();

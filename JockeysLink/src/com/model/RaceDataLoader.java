@@ -1,5 +1,6 @@
 package com.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +11,19 @@ import com.pckeiba.racedata.RaceDataSet;
 import com.pckeiba.umagoto.UmagotoDataLoad;
 import com.pckeiba.umagoto.UmagotoDataSet;
 
-public class RaceDataLoader {
-	private final RaceDataSet rds;
-	private final List<UmagotoDataSet> umaList;
-	private final List<Map<String,UmagotoDataSet>> umaMapList;
-	private final UmagotoDataLoad umaLoad;
+public class RaceDataLoader implements Serializable{
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private RaceDataSet rds;
+	private List<UmagotoDataSet> umaList;
+	private List<Map<String,UmagotoDataSet>> umaMapList;
+	private UmagotoDataLoad umaLoad;
+	private Map<Integer,UmagotoDataSet> kakoRaceDataMap;
+
+	public RaceDataLoader() {}
 
 	/**
 	 * コンストラクタ<br>レースコードで指定されたレースデータをダウンロードします。
@@ -67,6 +76,7 @@ public class RaceDataLoader {
 	 * @return 過去走の馬毎詳細オブジェクトのマップ
 	 */
 	public Map<Integer,UmagotoDataSet> getKakoRaceDataMap(int race){
-		return umaLoad.getMap(++race);
+		kakoRaceDataMap = umaLoad.getMap(++race);
+		return kakoRaceDataMap;
 	}
 }
