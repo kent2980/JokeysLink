@@ -141,29 +141,41 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		out.println("　父： " + uma1.getFather());
 		out.println("<br>");
 		out.println("母父： " + uma1.getGrandfather());
+		//<Drun>取得不可の例外処理
+		try{
+			//取得した値がnullならば例外発生！
+			drunList.get(uma1.getKettoTorokuBango()).getDrun().add(BigDecimal.ONE);
+			out.println("<div class=\"drun\">");
+			out.println(drunList.get(uma1.getKettoTorokuBango()).getDrun() + " pt_");
+			out.println(drunList.get(uma1.getKettoTorokuBango()).getDrunRunk());
+			out.println("</div>");
+		}catch(NullPointerException e){
+			out.println("計測不能");
+		}
 		out.println("<br>");
 		out.println(uma1.getTozaiShozoku());
 		out.println(uma1.getChokyoshi().replace("　", ""));
+		//<馬体重>取得不可の例外処理
 		try{
 			out.println(uma1.getZogensa().length()>0?uma1.getBataiju() + "kg(" + uma1.getZogensa() + ")":"");
-			out.println(drunList.get(uma1.getKettoTorokuBango()).getDrun());
-			out.println(drunList.get(uma1.getKettoTorokuBango()).getDrunRunk());
-			out.println("<br>");
 		}catch(NullPointerException e){
-			out.println("<br>");
+			System.out.println("馬体重を取得できません");
 		}finally{
-			try{
-				out.println(uma1.getTanshoNinkijun() + "人気");
-				out.println(uma1.getTanshoOdds());
-			}finally{
-				out.println(uma1.getSeibetsu() + uma1.getBarei());
-				out.println(uma1.getFutanJuryo() + "kg");
-				out.println(uma1.getKishumei().replace("　", ""));
-				out.println("</div>");
-				out.println("</td>");
-			}
+			out.println("<br>");
+		}
+		//<単勝人気>取得不可の例外処理
+		try{
+			out.println(uma1.getTanshoNinkijun() + "人気");
+			out.println(uma1.getTanshoOdds());
+		}finally{
+			out.println(uma1.getSeibetsu() + uma1.getBarei());
+			out.println(uma1.getFutanJuryo() + "kg");
+			out.println(uma1.getKishumei().replace("　", ""));
+			out.println("</div>");
+			out.println("</td>");
 		}
 		//過去走データ
+		//初出走時の例外処理
 		try{
 		for(int t = 0; t<map.size();t++){
 			UmagotoDataSet uma = map.get(t).get(uma1.getKettoTorokuBango());
@@ -171,6 +183,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				uma.toString();	//nullの場合は"初出走"
 			}
 			out.println("<td class=\"kakoso\">");
+			//t回前の過去走が存在しないときの例外処理
 			try{
 				String kakoKyosoTitle = uma.getKyosomeiRyakusho6().length()>0
 										?uma.getKyosomeiRyakusho6()
@@ -190,6 +203,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				out.println(uma.getCorner1Juni() + "-" + uma.getCorner2Juni() + "-" + uma.getCorner3Juni() + "-" + uma.getCorner4Juni());
 				out.println(uma.getShussoTosu() + "頭" + uma.getUmaban() + "番" + uma.getTanshoNinkijun() + "人");
 				out.println("<span class=\"srun\">");
+				//Srunが取得できないときの例外処理
 				try{
 					out.println(uma.getSrun().doubleValue()>0?uma.getSrun().toString() + " pt":"<span class=\"srunSmall\">" + uma.getSrun() + " pt</span>");
 				}catch(NullPointerException e){
