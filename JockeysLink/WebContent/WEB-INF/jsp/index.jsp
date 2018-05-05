@@ -20,9 +20,9 @@
 <link href="/JockeysLink/css/StyleDanceTable.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
-<body id="index">
+<body class="index">
 <header>
-<div class="headbar"></div>
+<div id="headbar"></div>
 <div class="headbutton">
 	<div class="home">
 		<a href="/JockeysLink/index">Home</a>
@@ -35,14 +35,12 @@
 	</div>
 </div>
 </header>
-
+<div id="content">
 <div class="keibajo">
 <%
 	int i = 0;
 	for(String keibajo : loader.getKeibajoList()){
-		out.println("<div class=\"keibajo" + i + "\">");
-		out.println(keibajo);
-		out.println("</div>");
+		out.println("<div class=\"keibajo" + i + "\">" + keibajo + "</div>");
 		i++;
 	}
 %>
@@ -54,7 +52,7 @@
 	i = 0;
 	out.println("<selection class=\"kaisai" + kaisaiArea + "\">");
 	for(String keibajo : loader.getKeibajoList()){
-		out.println("<div class=\"keibajo" + i + "\">");
+		out.println("<div class=\"racelist" + i + "\">");
 		List<RaceDataSet> raceList = loader.getRaceList(keibajo);
 		for(RaceDataSet rs : raceList){
 			String kyosoTitle = rs.getKyosomeiHondai().length()>0
@@ -80,6 +78,6 @@
 	out.println("</selection>");
 %>
 </div>
-
+</div>
 </body>
 </html>

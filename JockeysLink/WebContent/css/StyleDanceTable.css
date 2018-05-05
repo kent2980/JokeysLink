@@ -14,7 +14,7 @@ body {
 *********************************タイトルバー***************************************
 ***********************************************************************************/
 
- header .headbar{
+ header #headbar{
 	 top: 0;
 	 left: 0;
 	width: 100%;
@@ -283,41 +283,54 @@ float: right;
 
 /****競馬場表示****/
 
-#index section.keibajo {
-	background-color: rgba(110, 34, 34, 0.48);
-	width: 1205px;
+.keibajo {
+	width: 1245px;
 	margin: 0 auto;
 }
 
-#index .kari {
-	position: absolute;
-	z-index: 2;
+.keibajo0 {
+	width: 370px;
+	display: inline-block;
+padding: 0.5em 1em;
+text-decoration: none;
+background: #f7f7f7;
+border-left: solid 6px #2febc4;/*左線*/
+color: #585656;/*文字色*/
+font-weight: bold;
+box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
 }
 
-#index .keibajo0 {
-	padding-left: 160px;
-	font-size: 28px;
-	float: left;
+.keibajo1 {
+	width: 370px;
+	display: inline-block;
+padding: 0.5em 1em;
+text-decoration: none;
+background: #f7f7f7;
+border-left: solid 6px #2febc4;/*左線*/
+color: #585656;/*文字色*/
+font-weight: bold;
+box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
 }
 
-#index .keibajo1 {
-	padding-left: 350px;
-	font-size: 28px;
-	float: left;
+.keibajo2 {
+	width: 370px;
+	display: inline-block;
+padding: 0.5em 1em;
+text-decoration: none;
+background: #f7f7f7;
+border-left: solid 6px #2febc4;/*左線*/
+color: #585656;/*文字色*/
+font-weight: bold;
+box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
 }
-
-#index .keibajo2 {
-	padding-left: 970px;
-	font-size: 28px;
-}
-
 
 /****レースリスト****/
 
-#index .racebox {
+.racebox {
+	clear: both;
 	z-index: 1;
 	width: 1205px;
-	margin: 40px auto;
+	margin: 20px auto;
 	height: 720px;
 	padding: 1vw 1vw;
 	background-color: #dfdfdf;
@@ -325,7 +338,7 @@ float: right;
 	box-shadow: -2px -2px 10px #7e7e7e,4px 3px 10px;
 }
 
-#index .racebox a {
+.racebox a {
 	font-weight: 500;
 	color: #363636;
 	font-size: 16px;
@@ -334,17 +347,17 @@ float: right;
 	text-shadow: 2px 2px 4px #dddddd inset;
 }
 
-#index .racebox a:hover {
+.racebox a:hover {
 	color: #19599a;
 	font-weight: 800;
 	font-size: 17px;
 }
 
-#index .racebox a:active {
+.racebox a:active {
 	color: #363636;
 }
 
-#index .kaisai3 .keibajo0 {
+.kaisai3 .racelist0 {
 	height: 700px;
 	background-color: #fff;
 	box-shadow: 2px 2px 8px inset;
@@ -355,7 +368,7 @@ float: right;
 	float: left;
 }
 
-#index .kaisai3 .keibajo1 {
+.kaisai3 .racelist1 {
 	height: 700px;
 	background-color: #fff;
 	box-shadow: 2px 2px 8px inset;
@@ -366,7 +379,7 @@ float: right;
 	float: left;
 }
 
-#index .kaisai3 .keibajo2 {
+.kaisai3 .racelist2 {
 	height: 700px;
 	background-color: #fff;
 	box-shadow: 2px 2px 8px inset;
@@ -376,7 +389,7 @@ float: right;
 	float: left;
 }
 
-#index .kyosoinfo {
+.kyosoinfo {
 	font-size: 11px;
 	line-height: 2px;
 	margin-bottom: 10px;
