@@ -2,6 +2,7 @@ package com.servlet;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -17,11 +18,11 @@ import com.pckeiba.schedule.RaceListLoad;
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
+	/**　
 	 * フィールド
 	 */
 	private ImmediatelyAfterRace afterRace;
@@ -30,8 +31,17 @@ public class IndexServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		//リクエストパラメータがあればそちらを検索する
+		String kaisai = req.getParameter("kaisai");
+		LocalDate date;
+		try {
+			date = LocalDate.parse(kaisai, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		}catch(NullPointerException e) {
+			date = LocalDate.now();
+		}
+
 		//最も近いレース開催日を検索する
-		afterRace.setDate(LocalDate.now());
+		afterRace.setDate(date);
 		LocalDate kaisaiDate = afterRace.getKaisaiNenGappi();
 
 		//レースリストを取得する

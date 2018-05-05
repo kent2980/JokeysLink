@@ -11,4 +11,5 @@ public class UtilClass {
 		T castObj = (T) obj;
 		return castObj;
 	}
+
 }

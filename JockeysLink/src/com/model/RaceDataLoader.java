@@ -11,6 +11,8 @@ import com.pckeiba.racedata.RaceDataLoad;
 import com.pckeiba.racedata.RaceDataSet;
 import com.pckeiba.umagoto.UmagotoDataLoad;
 import com.pckeiba.umagoto.UmagotoDataSet;
+import com.pckeiba.umagoto.UmagotoDrunLoad;
+import com.pckeiba.umagoto.UmagotoDrunSet;
 
 public class RaceDataLoader implements Serializable{
 	/**
@@ -25,6 +27,7 @@ public class RaceDataLoader implements Serializable{
 	private List<Map<String,UmagotoDataSet>> umaMapList;
 	private UmagotoDataLoad umaLoad;
 	private Map<Integer,UmagotoDataSet> kakoRaceDataMap;
+	private Map<String,UmagotoDrunSet> drunList;
 
 	public RaceDataLoader() {}
 
@@ -71,6 +74,7 @@ public class RaceDataLoader implements Serializable{
 		rds = raceLoad.getRaceDataSet();
 
 		//馬毎データをダウンロードする
+		drunList = new UmagotoDrunLoad(raceCode).getDrunList();
 		umaLoad = new UmagotoDataLoad(raceCode,hit);
 		umaList = umaLoad.getList().stream().filter(s -> s.getUmaID()==1).collect(Collectors.toList());
 		umaMapList = new ArrayList<>();
@@ -111,6 +115,10 @@ public class RaceDataLoader implements Serializable{
 	public Map<Integer,UmagotoDataSet> getKakoRaceDataMap(int race){
 		kakoRaceDataMap = umaLoad.getMap(++race);
 		return kakoRaceDataMap;
+	}
+
+	public Map<String,UmagotoDrunSet> getDrunList() {
+		return drunList;
 	}
 
 }

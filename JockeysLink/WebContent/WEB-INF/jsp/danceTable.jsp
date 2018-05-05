@@ -2,15 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.pckeiba.racedata.RaceDataSet"
          import="com.pckeiba.umagoto.UmagotoDataSet"
+         import="com.pckeiba.umagoto.UmagotoDrunSet"
          import="java.util.List"
          import="java.util.Map"
          import="java.io.PrintWriter"
          import="com.util.UtilClass"
+         import="java.math.BigDecimal"
 %>
 <%
 RaceDataSet raceData = (RaceDataSet) request.getAttribute("raceData");
 List<UmagotoDataSet> umaList1 = UtilClass.AutoCast(request.getAttribute("umaList"));
 List<Map<String,UmagotoDataSet>> map = UtilClass.AutoCast(request.getAttribute("umaMap"));
+Map<String,UmagotoDrunSet> drunList = UtilClass.AutoCast(request.getAttribute("drunList"));
 PrintWriter pw = response.getWriter();
 String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				?raceData.getKyosomeiHondai()
@@ -28,7 +31,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 </head>
 <body id="raceData">
 <header>
-<div class="headbar"></div>
+<div id="headbar"></div>
 <div class="headbutton">
 	<div class="home">
 		<a href="/JockeysLink/index">Home</a>
@@ -121,7 +124,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		UmagotoDataSet uma1 = umaList1.get(i);
 
 		try{
-		if(!raceData.getDataKubun().equals(uma1.getDataKubun()))
+		if(!raceData.getDataKubun().equals(uma1.getDataKubun()) && uma1.getDataKubun().equals("1"))
 		throw new IllegalArgumentException();
 
 		//出走データ
@@ -133,11 +136,8 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		out.println("<div>");
 		out.println("<span class=\"name\">" + uma1.getBamei() + "</span>");
 		out.println("<span class=\"chakujun\">");
-		try{
-			out.println(uma1.getKakuteiChakujun()>0?uma1.getKakuteiChakujun() + "着":"");
-		}finally{
-			out.println("</span><br>");
-		}
+		out.println(uma1.getKakuteiChakujun()>0?uma1.getKakuteiChakujun() + "着":"");
+		out.println("</span><br>");
 		out.println("　父： " + uma1.getFather());
 		out.println("<br>");
 		out.println("母父： " + uma1.getGrandfather());
@@ -146,6 +146,8 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		out.println(uma1.getChokyoshi().replace("　", ""));
 		try{
 			out.println(uma1.getZogensa().length()>0?uma1.getBataiju() + "kg(" + uma1.getZogensa() + ")":"");
+			out.println(drunList.get(uma1.getKettoTorokuBango()).getDrun());
+			out.println(drunList.get(uma1.getKettoTorokuBango()).getDrunRunk());
 			out.println("<br>");
 		}catch(NullPointerException e){
 			out.println("<br>");

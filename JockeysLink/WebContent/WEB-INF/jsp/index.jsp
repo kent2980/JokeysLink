@@ -35,8 +35,8 @@
 	</div>
 </div>
 </header>
-<div id="content">
-<div class="keibajo">
+<nav id="keibajo">
+<ui>
 <%
 	int i = 0;
 	for(String keibajo : loader.getKeibajoList()){
@@ -44,7 +44,8 @@
 		i++;
 	}
 %>
-</div>
+</ui>
+</nav>
 
 <div class="racebox">
 <%
@@ -77,7 +78,6 @@
 	}
 	out.println("</selection>");
 %>
-</div>
 </div>
 </body>
 </html>

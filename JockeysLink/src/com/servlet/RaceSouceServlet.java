@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.model.RaceDataLoader;
 import com.pckeiba.racedata.RaceDataSet;
 import com.pckeiba.umagoto.UmagotoDataSet;
+import com.pckeiba.umagoto.UmagotoDrunSet;
 
 /**
  * Servlet implementation class ServletTest
@@ -58,8 +59,10 @@ public class RaceSouceServlet extends HttpServlet {
 		RaceDataSet raceData = loader.getRaceDataSet();
 		List<UmagotoDataSet> umaList = loader.getNowRaceDataList();
 		List<Map<String,UmagotoDataSet>> umaMap = loader.getKakoRaceDataMapList();
+		Map<String,UmagotoDrunSet> drunList = loader.getDrunList();
 
 		//各レース詳細オブジェクトをフォワードする
+		request.setAttribute("drunList", drunList);
 		request.setAttribute("raceData", raceData);
 		request.setAttribute("umaList", umaList);
 		request.setAttribute("umaMap", umaMap);
