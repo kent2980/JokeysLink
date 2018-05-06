@@ -10,21 +10,18 @@
 <title>Insert title here</title>
 </head>
 <body class="index">
-<header>
-<div id="headbar"></div>
-<div class="headbutton">
-	<div class="home">
-		<a href="/JockeysLink/index">Home</a>
-	</div>
-	<div class="schedule headbutton">
-		<a href="#">Schedule</a>
-	</div>
-	<div class="data headbutton">
-		<a href="#">Data</a>
-	</div>
-</div>
-</header>
-<nav id="keibajo">
+
+<nav>
+	<ui>
+		<li><a href="#">HOME</a></li>
+		<li><a href="#">本日のレース</a></li>
+		<li><a href="#">開催スケジュール</a></li>
+		<li><a href="#">データベース</a></li>
+		<li class="map"><a href="#">サイトマップ</a></li>
+	</ui>
+</nav>
+
+<div id="keibajo">
 <ui>
 <div class="keibajo0">新潟</div>
 <div class="keibajo1">東京</div>
@@ -37,9 +34,48 @@
 <selection class="kaisai3">
 <div class="racelist0">
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050504010301">
+<a href="/JockeysLink/Race?racecode=2018050604010401">
 1R
 09:50
+3歳未勝利
+<br>
+<div class="kyosoinfo">
+ダート
+1800m
+15頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050604010402">
+2R
+10:15
+3歳未勝利
+<br>
+<div class="kyosoinfo">
+ダート
+1200m
+15頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050604010403">
+3R
+10:45
+3歳未勝利
+<br>
+<div class="kyosoinfo">
+ダート
+1800m
+14頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050604010404">
+4R
+11:15
 サラ障害4歳以上未勝利
 <br>
 <div class="kyosoinfo">
@@ -50,127 +86,23 @@
 </a>
 </div>
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050504010302">
-2R
-10:25
-3歳未勝利
-<br>
-<div class="kyosoinfo">
-ダート
-1800m
-15頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050504010303">
-3R
-10:55
-3歳未勝利
-<br>
-<div class="kyosoinfo">
-ダート
-1200m
-15頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050504010304">
-4R
-11:25
-サラ障害4歳以上オープン
-<br>
-<div class="kyosoinfo">
-障害 芝
-3290m
-13頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050504010305">
+<a href="/JockeysLink/Race?racecode=2018050604010405">
 5R
-12:15
+12:05
 3歳未勝利
 <br>
 <div class="kyosoinfo">
 芝
-1400m
-16頭
+1800m
+15頭
 </div>
 </a>
 </div>
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050504010306">
+<a href="/JockeysLink/Race?racecode=2018050604010406">
 6R
-12:45
+12:35
 3歳未勝利
-<br>
-<div class="kyosoinfo">
-芝
-2000m
-14頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050504010307">
-7R
-13:15
-4歳以上500万下
-<br>
-<div class="kyosoinfo">
-ダート
-1200m
-15頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050504010308">
-8R
-13:45
-4歳以上500万下
-<br>
-<div class="kyosoinfo">
-ダート
-1800m
-15頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050504010309">
-9R
-14:15
-4歳以上500万下
-<br>
-<div class="kyosoinfo">
-芝
-2000m
-12頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050504010310">
-10R
-14:50
-わらび賞
-<br>
-<div class="kyosoinfo">
-ダート
-1800m
-10頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050504010311">
-11R
-15:25
-駿風ステークス
 <br>
 <div class="kyosoinfo">
 芝
@@ -180,245 +112,152 @@
 </a>
 </div>
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050504010312">
-12R
-16:01
-二王子特別
+<a href="/JockeysLink/Race?racecode=2018050604010407">
+7R
+13:05
+4歳以上500万下
+<br>
+<div class="kyosoinfo">
+ダート
+1800m
+15頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050604010408">
+8R
+13:35
+4歳以上500万下
 <br>
 <div class="kyosoinfo">
 芝
-1800m
-12頭
+1200m
+16頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050604010409">
+9R
+14:05
+4歳以上500万下
+<br>
+<div class="kyosoinfo">
+ダート
+1200m
+15頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050604010410">
+10R
+14:40
+三条特別
+<br>
+<div class="kyosoinfo">
+芝
+1600m
+16頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050604010411">
+11R
+15:20
+新潟大賞典
+<br>
+<div class="kyosoinfo">
+芝
+2000m
+16頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050604010412">
+12R
+16:01
+八海山特別
+<br>
+<div class="kyosoinfo">
+ダート
+1200m
+15頭
 </div>
 </a>
 </div>
 </div>
 <div class="racelist1">
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050505020501">
-1R
-10:15
-3歳未勝利
-<br>
-<div class="kyosoinfo">
-ダート
-1600m
-12頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050505020502">
-2R
-10:45
-3歳未勝利
-<br>
-<div class="kyosoinfo">
-ダート
-1400m
-16頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050505020503">
-3R
-11:15
-3歳未勝利
-<br>
-<div class="kyosoinfo">
-ダート
-1600m
-14頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050505020504">
-4R
-11:45
-3歳未勝利
-<br>
-<div class="kyosoinfo">
-芝
-1600m
-18頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050505020505">
-5R
-12:35
-3歳500万下
-<br>
-<div class="kyosoinfo">
-芝
-1800m
-10頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050505020506">
-6R
-13:05
-4歳以上500万下
-<br>
-<div class="kyosoinfo">
-芝
-2400m
-8頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050505020507">
-7R
-13:35
-4歳以上500万下
-<br>
-<div class="kyosoinfo">
-ダート
-1400m
-16頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050505020508">
-8R
-14:05
-4歳以上1000万下
-<br>
-<div class="kyosoinfo">
-芝
-1400m
-14頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050505020509">
-9R
-14:35
-立夏ステークス
-<br>
-<div class="kyosoinfo">
-ダート
-1600m
-14頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050505020510">
-10R
-15:10
-メトロポリタンＳ
-<br>
-<div class="kyosoinfo">
-芝
-2400m
-11頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050505020511">
-11R
-15:45
-プリンシパルＳ
-<br>
-<div class="kyosoinfo">
-芝
-2000m
-14頭
-</div>
-</a>
-</div>
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050505020512">
-12R
-16:25
-4歳以上1000万下
-<br>
-<div class="kyosoinfo">
-ダート
-1600m
-14頭
-</div>
-</a>
-</div>
-</div>
-<div class="racelist2">
-<div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050508030501">
+<a href="/JockeysLink/Race?racecode=2018050605020601">
 1R
 10:05
 3歳未勝利
 <br>
 <div class="kyosoinfo">
 ダート
-1400m
-16頭
+1600m
+14頭
 </div>
 </a>
 </div>
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050508030502">
+<a href="/JockeysLink/Race?racecode=2018050605020602">
 2R
 10:35
 3歳未勝利
 <br>
 <div class="kyosoinfo">
 ダート
-1800m
+1300m
 16頭
 </div>
 </a>
 </div>
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050508030503">
+<a href="/JockeysLink/Race?racecode=2018050605020603">
 3R
 11:05
 3歳未勝利
 <br>
 <div class="kyosoinfo">
-ダート
-1400m
-16頭
+芝
+1800m
+13頭
 </div>
 </a>
 </div>
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050508030504">
+<a href="/JockeysLink/Race?racecode=2018050605020604">
 4R
 11:35
 3歳未勝利
 <br>
 <div class="kyosoinfo">
 芝
-1400m
-18頭
+2300m
+9頭
 </div>
 </a>
 </div>
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050508030505">
+<a href="/JockeysLink/Race?racecode=2018050605020605">
 5R
 12:25
-3歳未勝利
+3歳500万下
 <br>
 <div class="kyosoinfo">
-芝
+ダート
 1600m
-18頭
+14頭
 </div>
 </a>
 </div>
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050508030506">
+<a href="/JockeysLink/Race?racecode=2018050605020606">
 6R
 12:55
 3歳500万下
@@ -426,28 +265,108 @@
 <div class="kyosoinfo">
 芝
 1400m
-8頭
+10頭
 </div>
 </a>
 </div>
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050508030507">
+<a href="/JockeysLink/Race?racecode=2018050605020607">
 7R
 13:25
 4歳以上500万下
 <br>
 <div class="kyosoinfo">
 ダート
-1900m
-15頭
+1600m
+16頭
 </div>
 </a>
 </div>
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050508030508">
+<a href="/JockeysLink/Race?racecode=2018050605020608">
 8R
 13:55
-4歳以上500万下
+4歳以上1000万下
+<br>
+<div class="kyosoinfo">
+芝
+2000m
+11頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050605020609">
+9R
+14:25
+湘南ステークス
+<br>
+<div class="kyosoinfo">
+芝
+1600m
+12頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050605020610">
+10R
+15:01
+ブリリアントＳ
+<br>
+<div class="kyosoinfo">
+ダート
+2100m
+16頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050605020611">
+11R
+15:40
+ＮＨＫマイルカップ
+<br>
+<div class="kyosoinfo">
+芝
+1600m
+18頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050605020612">
+12R
+16:25
+立川特別
+<br>
+<div class="kyosoinfo">
+ダート
+1400m
+16頭
+</div>
+</a>
+</div>
+</div>
+<div class="racelist2">
+<div>
+<a href="/JockeysLink/Race?racecode=2018050608030601">
+1R
+09:55
+3歳未勝利
+<br>
+<div class="kyosoinfo">
+ダート
+1900m
+12頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050608030602">
+2R
+10:25
+3歳未勝利
 <br>
 <div class="kyosoinfo">
 ダート
@@ -457,10 +376,23 @@
 </a>
 </div>
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050508030509">
-9R
-14:25
-鴨川特別
+<a href="/JockeysLink/Race?racecode=2018050608030603">
+3R
+10:55
+3歳未勝利
+<br>
+<div class="kyosoinfo">
+芝
+1800m
+14頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050608030604">
+4R
+11:25
+3歳未勝利
 <br>
 <div class="kyosoinfo">
 芝
@@ -470,41 +402,106 @@
 </a>
 </div>
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050508030510">
-10R
-15:01
-パールステークス
+<a href="/JockeysLink/Race?racecode=2018050608030605">
+5R
+12:15
+3歳500万下
 <br>
 <div class="kyosoinfo">
-芝
+ダート
+1400m
+14頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050608030606">
+6R
+12:45
+3歳500万下
+<br>
+<div class="kyosoinfo">
+ダート
 1800m
-9頭
+13頭
 </div>
 </a>
 </div>
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050508030511">
-11R
-15:35
-京都新聞杯
+<a href="/JockeysLink/Race?racecode=2018050608030607">
+7R
+13:15
+4歳以上500万下
 <br>
 <div class="kyosoinfo">
 芝
-2200m
-17頭
+2400m
+8頭
 </div>
 </a>
 </div>
 <div>
-<a href="http://192.168.10.60:8080/JockeysLink/Race?racecode=2018050508030512">
-12R
-16:10
-4歳以上1000万下
+<a href="/JockeysLink/Race?racecode=2018050608030608">
+8R
+13:45
+4歳以上500万下
+<br>
+<div class="kyosoinfo">
+ダート
+1400m
+16頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050608030609">
+9R
+14:15
+橘ステークス
+<br>
+<div class="kyosoinfo">
+芝
+1400m
+8頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050608030610">
+10R
+14:50
+上賀茂ステークス
 <br>
 <div class="kyosoinfo">
 ダート
 1800m
 16頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050608030611">
+11R
+15:30
+鞍馬ステークス
+<br>
+<div class="kyosoinfo">
+芝
+1200m
+15頭
+</div>
+</a>
+</div>
+<div>
+<a href="/JockeysLink/Race?racecode=2018050608030612">
+12R
+16:10
+4歳以上1000万下
+<br>
+<div class="kyosoinfo">
+芝
+1600m
+11頭
 </div>
 </a>
 </div>

@@ -30,20 +30,16 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 <title><%= raceData.getKaisaiNenGappi() + " " + kyosoTitle %></title>
 </head>
 <body id="raceData">
-<header>
-<div id="headbar"></div>
-<div class="headbutton">
-	<div class="home">
-		<a href="/JockeysLink/index">Home</a>
-	</div>
-	<div class="schedule headbutton">
-		<a href="#">Schedule</a>
-	</div>
-	<div class="data headbutton">
-		<a href="#">Data</a>
-	</div>
-</div>
-</header>
+
+<nav>
+	<ui>
+		<li><a href="/JockeysLink/index">HOME</a></li>
+		<li><a href="#">本日のレース</a></li>
+		<li><a href="#">開催スケジュール</a></li>
+		<li><a href="#">データベース</a></li>
+		<li class="map"><a href="#">サイトマップ</a></li>
+	</ui>
+</nav>
 
 <div class="raceinfo">
 <!-- ***********************【開催年月日・開催回次・競馬場・開催日次・レース番号】**********************************-->

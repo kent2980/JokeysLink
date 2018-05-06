@@ -21,21 +21,18 @@
 <title>Insert title here</title>
 </head>
 <body class="index">
-<header>
-<div id="headbar"></div>
-<div class="headbutton">
-	<div class="home">
-		<a href="/JockeysLink/index">Home</a>
-	</div>
-	<div class="schedule headbutton">
-		<a href="#">Schedule</a>
-	</div>
-	<div class="data headbutton">
-		<a href="#">Data</a>
-	</div>
-</div>
-</header>
-<nav id="keibajo">
+
+<nav>
+	<ui>
+		<li><a href="#">HOME</a></li>
+		<li><a href="#">本日のレース</a></li>
+		<li><a href="#">開催スケジュール</a></li>
+		<li><a href="#">データベース</a></li>
+		<li class="map"><a href="#">サイトマップ</a></li>
+	</ui>
+</nav>
+
+<div id="keibajo">
 <ui>
 <%
 	int i = 0;
@@ -45,7 +42,7 @@
 	}
 %>
 </ui>
-</nav>
+</div>
 
 <div class="racebox">
 <%
