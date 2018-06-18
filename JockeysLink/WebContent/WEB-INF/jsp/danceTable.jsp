@@ -144,6 +144,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 			out.println("<div class=\"drun\">");
 			out.println(drunList.get(uma1.getKettoTorokuBango()).getDrun() + " pt_");
 			out.println(drunList.get(uma1.getKettoTorokuBango()).getDrunRunk());
+			out.println(drunList.get(uma1.getKettoTorokuBango()).getBunsan());
 			out.println("</div>");
 		}catch(NullPointerException e){
 			out.println("計測不能");
