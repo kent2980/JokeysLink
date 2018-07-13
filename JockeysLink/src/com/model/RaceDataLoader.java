@@ -1,7 +1,6 @@
 package com.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -120,5 +119,10 @@ public class RaceDataLoader implements Serializable{
 	public Map<String,UmagotoDrunSet> getDrunList() {
 		return drunList;
 	}
+
+	public UmagotoDataLoad getUmaLoad() {
+		return umaLoad;
+	}
+
 
 }

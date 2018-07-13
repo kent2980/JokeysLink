@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.model.RaceDataLoader;
+import com.pckeiba.analysis.UmagotoAnalysis;
 import com.pckeiba.racedata.RaceDataSet;
 import com.pckeiba.umagoto.UmagotoDataSet;
 import com.pckeiba.umagoto.UmagotoDrunSet;
@@ -60,12 +61,14 @@ public class RaceSouceServlet extends HttpServlet {
 		List<UmagotoDataSet> umaList = loader.getNowRaceDataList();
 		List<Map<String,UmagotoDataSet>> umaMap = loader.getKakoRaceDataMapList();
 		Map<String,UmagotoDrunSet> drunList = loader.getDrunList();
+		UmagotoAnalysis analysis = new UmagotoAnalysis(loader.getUmaLoad());
 
 		//各レース詳細オブジェクトをフォワードする
 		request.setAttribute("drunList", drunList);
 		request.setAttribute("raceData", raceData);
 		request.setAttribute("umaList", umaList);
 		request.setAttribute("umaMap", umaMap);
+		request.setAttribute("analysis", analysis);
 		RequestDispatcher di = request.getRequestDispatcher("/WEB-INF/jsp/danceTable.jsp");
 		di.forward(request, response);
 

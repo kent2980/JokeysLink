@@ -3,6 +3,7 @@
 <%@ page import="com.pckeiba.racedata.RaceDataSet"
          import="com.pckeiba.umagoto.UmagotoDataSet"
          import="com.pckeiba.umagoto.UmagotoDrunSet"
+         import="com.pckeiba.analysis.UmagotoAnalysis"
          import="java.util.List"
          import="java.util.Map"
          import="java.io.PrintWriter"
@@ -14,6 +15,7 @@ RaceDataSet raceData = (RaceDataSet) request.getAttribute("raceData");
 List<UmagotoDataSet> umaList1 = UtilClass.AutoCast(request.getAttribute("umaList"));
 List<Map<String,UmagotoDataSet>> map = UtilClass.AutoCast(request.getAttribute("umaMap"));
 Map<String,UmagotoDrunSet> drunList = UtilClass.AutoCast(request.getAttribute("drunList"));
+UmagotoAnalysis analysis = (UmagotoAnalysis) request.getAttribute("analysis");
 PrintWriter pw = response.getWriter();
 String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				?raceData.getKyosomeiHondai()
@@ -117,6 +119,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 <!-- **************【データ部】************* -->
 	<%
 	for(int i = 0; i < umaList1.size(); i++){
+		int umaban = i + 1;
 		UmagotoDataSet uma1 = umaList1.get(i);
 
 		try{
@@ -168,6 +171,12 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 			out.println(uma1.getSeibetsu() + uma1.getBarei());
 			out.println(uma1.getFutanJuryo() + "kg");
 			out.println(uma1.getKishumei().replace("　", ""));
+			out.println("<br><div class=\"analysis\">");
+			out.println("距離 :");
+			out.println(analysis.getDistanceAnalisis(umaban));
+			out.println("間隔 :");
+			out.println(analysis.getRaceInterval(umaban));
+			out.println("</div>");
 			out.println("</div>");
 			out.println("</td>");
 		}
