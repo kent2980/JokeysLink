@@ -4,9 +4,11 @@
 
     import="com.pckeiba.schedule.RaceListLoad"
     import="com.pckeiba.racedata.RaceDataSet"
+    import="com.pckeiba.racedata.RaceDataSetComparetor"
     import="java.util.List"
     import="java.util.Map"
     import="java.util.stream.Collectors"
+    import="java.util.Collections"
 %>
 <%
 	RaceListLoad loader = (RaceListLoad)request.getAttribute("loader");
@@ -52,6 +54,7 @@
 	for(String keibajo : loader.getKeibajoList()){
 		out.println("<div class=\"racelist" + i + "\">");
 		List<RaceDataSet> raceList = loader.getRaceList(keibajo);
+		Collections.sort(raceList, new RaceDataSetComparetor());
 		for(RaceDataSet rs : raceList){
 			String kyosoTitle = rs.getKyosomeiHondai().length()>0
 					?rs.getKyosomeiRyaku10()
