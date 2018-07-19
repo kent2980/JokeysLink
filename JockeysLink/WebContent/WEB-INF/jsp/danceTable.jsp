@@ -9,6 +9,7 @@
          import="java.io.PrintWriter"
          import="com.util.UtilClass"
          import="java.math.BigDecimal"
+         import="java.lang.IndexOutOfBoundsException"
 %>
 <%
 RaceDataSet raceData = (RaceDataSet) request.getAttribute("raceData");
@@ -171,12 +172,18 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 			out.println(uma1.getSeibetsu() + uma1.getBarei());
 			out.println(uma1.getFutanJuryo() + "kg");
 			out.println(uma1.getKishumei().replace("　", ""));
-			out.println("<br><div class=\"analysis\">");
-			out.println("距離 :");
-			out.println(analysis.getDistanceAnalisis(umaban));
-			out.println("間隔 :");
-			out.println(analysis.getRaceInterval(umaban));
-			out.println("</div>");
+			try{
+				out.println("<br>");
+				analysis.getDistanceAnalisis(1);	//インデックスが存在しない場合は例外をスローします
+				out.println("<div class=\"analysis\">");
+				out.println("距離 :");
+				out.println(analysis.getDistanceAnalisis(umaban));
+				out.println("間隔 :");
+				out.println(analysis.getRaceInterval(umaban));
+				out.println("</div>");
+			}catch(IndexOutOfBoundsException e){
+				out.println("適正データをダウンロードできません");
+			}
 			out.println("</div>");
 			out.println("</td>");
 		}
