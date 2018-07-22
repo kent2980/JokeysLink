@@ -18,7 +18,7 @@ SelectYearSchedule schedule = (SelectYearSchedule)request.getAttribute("schedule
 <body>
 <%
 	//本日までのレースのみを抽出します
-	List<KaisaiScheduleSet> scheduleList = schedule.getScheduleList(LocalDate.now().plusWeeks(1));
+	List<KaisaiScheduleSet> scheduleList = schedule.getScheduleList(LocalDate.now().plusDays(2));
 	//開催スケジュールを表示します
 	for(KaisaiScheduleSet s : scheduleList){
 		out.println("<a href=\"/JockeysLink/index?kaisai=" + s.getKaisaiNengappi() + "\">" + s.getKaisaiNengappi() + "</a>");
