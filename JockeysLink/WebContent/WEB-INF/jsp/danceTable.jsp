@@ -10,6 +10,7 @@
          import="com.util.UtilClass"
          import="java.math.BigDecimal"
          import="java.lang.IndexOutOfBoundsException"
+   		 import="java.time.LocalDate"
 %>
 <%
 RaceDataSet raceData = (RaceDataSet) request.getAttribute("raceData");
@@ -38,7 +39,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 	<ui>
 		<li><a href="/JockeysLink/index">HOME</a></li>
 		<li><a href="#">本日のレース</a></li>
-		<li><a href="#">開催スケジュール</a></li>
+		<li><a href="/JockeysLink/kaisaichedule?year=<% out.println(LocalDate.now().getYear()); %>">開催スケジュール</a></li>
 		<li><a href="#">データベース</a></li>
 		<li class="map"><a href="#">サイトマップ</a></li>
 	</ui>
