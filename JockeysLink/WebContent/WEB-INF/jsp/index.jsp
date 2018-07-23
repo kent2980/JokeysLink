@@ -27,7 +27,7 @@
 
 <nav>
 	<ui>
-		<li><a href="#">HOME</a></li>
+		<li><a href="/JockeysLink/index">HOME</a></li>
 		<li><a href="#">本日のレース</a></li>
 		<li><a href="/JockeysLink/kaisaichedule?year=<% out.println(LocalDate.now().getYear()); %>">開催スケジュール</a></li>
 		<li><a href="#">データベース</a></li>

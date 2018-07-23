@@ -152,6 +152,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 			out.println(drunList.get(uma1.getKettoTorokuBango()).getBunsan());
 			out.println("</div>");
 		}catch(NullPointerException e){
+			e.getStackTrace();
 			out.println("計測不能");
 		}
 		out.println("<br>");
@@ -161,7 +162,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		try{
 			out.println(uma1.getZogensa().length()>0?uma1.getBataiju() + "kg(" + uma1.getZogensa() + ")":"");
 		}catch(NullPointerException e){
-			System.out.println("馬体重を取得できません");
+			e.getStackTrace();
 		}finally{
 			out.println("<br>");
 		}
@@ -233,12 +234,14 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				out.println(uma.getFutanJuryo());
 				out.println(uma.getAiteBamei1() + "(" + uma.getTimeSa() + ")");
 			}catch(NullPointerException e){
+				e.getStackTrace();
 				out.println("<span class=\"kakosoError\"><div>未出走</div></span>");
 			}finally{
 				out.println("</td>");
 			}
 		}
 	}catch(NullPointerException e){
+		e.getStackTrace();
 		out.println("<td colspan=\"4\"><span class=\"kakosoError\"><div>初出走</div></span></td>");
 	}
 		//ここまで
