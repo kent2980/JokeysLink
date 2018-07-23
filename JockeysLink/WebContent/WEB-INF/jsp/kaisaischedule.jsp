@@ -5,6 +5,7 @@
     import="com.pckeiba.schedule.*"
     import="java.util.*"
     import="java.time.LocalDate"
+    import="java.time.format.DateTimeFormatter"
 %>
 <%
 SelectYearSchedule schedule = (SelectYearSchedule)request.getAttribute("schedule");
@@ -43,7 +44,7 @@ SelectYearSchedule schedule = (SelectYearSchedule)request.getAttribute("schedule
 			date = s.getKaisaiNengappi();
 			out.print("<div class=\"nengappi\">");
 			%>
-			<a href="/JockeysLink/index?kaisai=<% out.print(s.getKaisaiNengappi()); %>"><% out.print(s.getKaisaiNengappi()); %></a>
+			<a href="/JockeysLink/index?kaisai=<% out.print(s.getKaisaiNengappi()); %>"><% out.print(s.getKaisaiNengappi().format(DateTimeFormatter.ofPattern("MM月dd日")) + "（" + s.getYobi() + "）"); %></a>
 			<%
 		}
 		if(s.getJusho1().getTokubetsuKyosoBango()>0){
