@@ -44,7 +44,9 @@ SelectYearSchedule schedule = (SelectYearSchedule)request.getAttribute("schedule
 			date = s.getKaisaiNengappi();
 			out.print("<div class=\"nengappi\">");
 			%>
-			<a href="/JockeysLink/index?kaisai=<% out.print(s.getKaisaiNengappi()); %>"><% out.print(s.getKaisaiNengappi().format(DateTimeFormatter.ofPattern("MM月dd日")) + "（" + s.getYobi() + "）"); %></a>
+			<span class="maru normal blue">
+			<a class="letter3" href="/JockeysLink/index?kaisai=<% out.print(s.getKaisaiNengappi()); %>"><% out.print(s.getKaisaiNengappi().format(DateTimeFormatter.ofPattern("MM/dd")) + "<br>（" + s.getYobi() + "）"); %></a>
+			</span>
 			<%
 		}
 		if(s.getJusho1().getTokubetsuKyosoBango()>0){
