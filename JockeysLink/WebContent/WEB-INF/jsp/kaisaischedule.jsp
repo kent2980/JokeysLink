@@ -43,23 +43,56 @@ SelectYearSchedule schedule = (SelectYearSchedule)request.getAttribute("schedule
 				out.println("</div>");
 			date = s.getKaisaiNengappi();
 			out.print("<div class=\"nengappi\">");
+			switch(s.getYobi()){
+			case "土":
+				out.println("<span class=\"maru normal blue\">");
+				break;
+			case "日":
+				out.println("<span class=\"maru normal red\">");
+				break;
+			case "祝":
+				out.println("<span class=\"maru normal green\">");
+				break;
+			default:
+				out.println("<span class=\"maru normal yellow\">");
+			}
 			%>
-			<span class="maru normal blue">
+
 			<a class="letter3" href="/JockeysLink/index?kaisai=<% out.print(s.getKaisaiNengappi()); %>"><% out.print(s.getKaisaiNengappi().format(DateTimeFormatter.ofPattern("MM/dd")) + "<br>（" + s.getYobi() + "）"); %></a>
 			</span>
+
+			<span class="kaisaikeibajo shikaku white">
+        	<span class="kaisaikeibajo moji">
 			<%
 		}
-		if(s.getJusho1().getTokubetsuKyosoBango()>0){
-			%>
-			<span class="keibajo"><% out.print(s.getKeibajo()); %>競馬場</span>
-			<span class="kyosoTitle"><a href="/JockeysLink/Race?racecode=<% out.print(s.getJusho1().getRaceCode()); %>"><% out.print(s.getJusho1().getKyosomeiRyakusho_6()); %></a></span>
-			<%
+		%>
+		<span class="jodata">
+		<span class="keibajo"><% out.print(s.getKeibajo()); %>競馬場</span>
+		<%
+		if(s.getJusho1().getTokubetsuKyosoBango() != 0){
+		%>
+		<span class="kyosoTitle"><a href="/JockeysLink/Race?racecode=<% out.print(s.getJusho1().getRaceCode()); %>"><% out.print(s.getJusho1().getKyosomeiRyakusho_6()); %></a></span>
+		<div class="jushodata kyori small"><% out.print(s.getJusho1().getKyori()>0?s.getJusho1().getKyori() + "m":""); %></div>
+		<span class="jushodata track small"><% out.print(s.getJusho1().getJushoTrack()); %></span>
+		<span class="jushodata juryoshubetsu small"><% out.print(s.getJusho1().getJuryoShubetsu()); %></span>
+		<span class="jushodata kyososhubetsu small"><% out.print(s.getJusho1().getKyosoShubetsu()); %></span>
+		<span class="jushodata grade small"><% out.print(s.getJusho1().getJushoGrade()); %></span>
+		</span>
+		<%
 		}else{
-			%>
-			<span class="keibajo notJusho"><% out.print(s.getKeibajo()); %>競馬場</span>
-			<%
+		%>
+		<span class="kyosoTitle"><a href="/JockeysLink/Race?racecode=<% out.print(s.getMainKyoso().getRaceCode()); %>"><% out.print(s.getMainKyoso().getKyosomeiRyakusho_6()); %></a></span>
+		<div class="jushodata kyori small"><% out.print(s.getMainKyoso().getKyori()>0?s.getMainKyoso().getKyori() + "m":""); %></div>
+		<span class="jushodata track small"><% out.print(s.getMainKyoso().getJushoTrack()); %></span>
+		<span class="jushodata juryoshubetsu small"><% out.print(s.getMainKyoso().getJuryoShubetsu()); %></span>
+		<span class="jushodata kyososhubetsu small"><% out.print(s.getMainKyoso().getKyosoShubetsu()); %></span>
+		<span class="jushodata grade small"><% out.print(s.getMainKyoso().getJushoGrade()); %></span>
+		</span>
+		<%
 		}
 	}
+	out.println("</span>");
+	out.println("</span>");
 	out.println("<div>");
 %>
 </div>
