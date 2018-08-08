@@ -39,8 +39,18 @@ SelectYearSchedule schedule = (SelectYearSchedule)request.getAttribute("schedule
 	for(KaisaiScheduleSet s : scheduleList){
 		//開催年月日が異なる場合は・・・
 		if(!s.getKaisaiNengappi().isEqual(date)){
-			if(!date.isEqual(LocalDate.of(1900, 1, 1)))
+			if(!date.isEqual(LocalDate.of(1900, 1, 1))){
+				out.println("</span>");
+				out.println("</span>");
 				out.println("</div>");
+			}
+			%>
+
+			<!-- **********************************************************************************************
+			****************** ここから<% out.print(s.getKaisaiNengappi()); %>の記述をはじめます ***************************************
+			*************************************************************************************************** -->
+
+			<%
 			date = s.getKaisaiNengappi();
 			out.print("<div class=\"nengappi\">");
 			switch(s.getYobi()){

@@ -246,7 +246,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 	}
 		//ここまで
 		out.println("</tr>");
-	}catch(IllegalArgumentException e){
+	}catch(IllegalArgumentException | NullPointerException e){
 		e.printStackTrace();
 	}
 	}
