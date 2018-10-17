@@ -189,7 +189,13 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 			out.println("</div>");
 			out.println("</td>");
 		}
-		//過去走データ
+
+		/***************************************************************************************************
+		****************************************************************************************************
+		*******************************************<<過去走データ*>>*******************************************
+		****************************************************************************************************
+		****************************************************************************************************/
+
 		//初出走時の例外処理
 		try{
 		for(int t = 0; t<map.size();t++){
@@ -227,7 +233,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				out.println("</span>");
 				out.println("<br>");
 				out.println(uma.getSohaTimeValue());
-				out.println(uma.getKohan3F());
+				out.println(uma.getZenhan3f() + "-" + uma.getKohan3F());
 				out.println(uma.getBataiju() + "kg(" + uma.getZogensa() + ")");
 				out.println("<br>");
 				out.println(uma.getKishumeiRyakusho());
