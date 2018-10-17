@@ -233,7 +233,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				out.println("</span>");
 				out.println("<br>");
 				out.println(uma.getSohaTimeValue());
-				out.println(uma.getZenhan3f() + "-" + uma.getKohan3F());
+				out.println(uma.getRaceZenhan3f() + "-" + uma.getKohan3F());
 				out.println(uma.getBataiju() + "kg(" + uma.getZogensa() + ")");
 				out.println("<br>");
 				out.println(uma.getKishumeiRyakusho());
