@@ -220,6 +220,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				out.println(uma.getKeibajo());
 				out.println(uma.getTenko());
 				out.println(uma.getShibaBabaJotai().length()>0?uma.getShibaBabaJotai():uma.getDirtBabaJotai());
+				out.println("RPCI：" + uma.getRpci());
 				out.println("<br>");
 				out.println(uma.getCorner1Juni() + "-" + uma.getCorner2Juni() + "-" + uma.getCorner3Juni() + "-" + uma.getCorner4Juni());
 				out.println(uma.getShussoTosu() + "頭" + uma.getUmaban() + "番" + uma.getTanshoNinkijun() + "人");
