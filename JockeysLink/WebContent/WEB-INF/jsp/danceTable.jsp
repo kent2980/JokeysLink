@@ -220,10 +220,11 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				out.println(uma.getKeibajo());
 				out.println(uma.getTenko());
 				out.println(uma.getShibaBabaJotai().length()>0?uma.getShibaBabaJotai():uma.getDirtBabaJotai());
-				out.println("RP：" + uma.getRpci());
+				out.println("RP：" + uma.getRPCI());
 				out.println("fP：" + uma.getfPCI());
 				out.println("<br>");
 				out.println(uma.getCorner1Juni() + "-" + uma.getCorner2Juni() + "-" + uma.getCorner3Juni() + "-" + uma.getCorner4Juni());
+				out.println(uma.getKyakushitsu());
 				out.println(uma.getShussoTosu() + "頭" + uma.getUmaban() + "番" + uma.getTanshoNinkijun() + "人");
 				out.println("<span class=\"srun\">");
 				//Srunが取得できないときの例外処理
