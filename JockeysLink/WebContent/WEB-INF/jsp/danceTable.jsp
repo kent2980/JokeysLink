@@ -139,6 +139,8 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		out.println("<span class=\"chakujun\">");
 		out.println(uma1.getKakuteiChakujun()>0?uma1.getKakuteiChakujun() + "着":"");
 		out.println("</span><br>");
+		out.println("SRUN：" + uma1.getSrun());
+		out.println("<br>");
 		out.println("　父： " + uma1.getFather());
 		out.println("<br>");
 		out.println("母父： " + uma1.getGrandfather());
