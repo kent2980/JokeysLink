@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"
 
     import="com.pckeiba.schedule.RaceListLoad"
-    import="com.pckeiba.racedata.RaceDataSet"
+    import="com.pckeiba.racedata.RaceDataDefault"
     import="com.pckeiba.racedata.RaceDataSetComparetor"
     import="java.util.List"
     import="java.util.Map"
@@ -54,9 +54,9 @@
 	out.println("<selection class=\"kaisai" + kaisaiArea + "\">");
 	for(String keibajo : loader.getKeibajoList()){
 		out.println("<div class=\"racelist" + i + "\">");
-		List<RaceDataSet> raceList = loader.getRaceList(keibajo);
+		List<RaceDataDefault> raceList = loader.getRaceList(keibajo);
 		Collections.sort(raceList, new RaceDataSetComparetor());
-		for(RaceDataSet rs : raceList){
+		for(RaceDataDefault rs : raceList){
 			String kyosoTitle = rs.getKyosomeiHondai().length()>0
 					?rs.getKyosomeiRyaku10()
 					:rs.getKyosoShubetsu().substring(rs.getKyosoShubetsu().indexOf("系")+1, rs.getKyosoShubetsu().length()) + rs.getKyosoJoken();

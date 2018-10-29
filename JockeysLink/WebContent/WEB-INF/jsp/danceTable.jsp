@@ -93,6 +93,9 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 	out.println(raceData.getHassoJikoku());
 	out.println(raceData.getTenko());
 	out.println(raceData.getShibaJotai().length()>0?raceData.getShibaJotai():raceData.getDirtJotai());
+	out.println("RPCI：" + raceData.getRPCI());
+	out.println("AVE3F：" + raceData.getAve3f());
+	out.println("SRUN：" + raceData.getSrunRow());
 	%>
 </span>
 </div>
@@ -218,7 +221,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				out.println(uma.getKyori() + "m");
 				out.println("<br>");
 				String grade = uma.getGrade().length()==0?uma.getKyosoJoken():uma.getGrade().equals("特別競走")?uma.getKyosoJoken():uma.getGrade();
-				out.println(kakoKyosoTitle);
+				out.println("<a href=\"/JockeysLink/Race?racecode=" + uma.getRaceCode() + "\">" + kakoKyosoTitle + "</a>");
 				out.println(uma.getKeibajo());
 				out.println(uma.getTenko());
 				out.println(uma.getShibaBabaJotai().length()>0?uma.getShibaBabaJotai():uma.getDirtBabaJotai());
