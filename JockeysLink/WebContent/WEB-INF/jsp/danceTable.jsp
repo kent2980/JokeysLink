@@ -22,6 +22,7 @@ PrintWriter pw = response.getWriter();
 String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				?raceData.getKyosomeiHondai()
 				:raceData.getKyosoShubetsu().substring(raceData.getKyosoShubetsu().indexOf("系")+1, raceData.getKyosoShubetsu().length()) + raceData.getKyosoJoken();
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -132,7 +133,6 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		throw new IllegalArgumentException();
 
 		//出走データ
-
 		out.println("<tr>");
 		out.println(uma1.getDataKubun().equals("1")?"<td></td>":"<td class=\"bango wakuColor" + uma1.getWakuban() + "\">" + uma1.getWakuban() + "</td>");
 		out.println(uma1.getDataKubun().equals("1")?"<td></td>":"<td class=\"bango\">" + uma1.getUmaban() + "</td>");
@@ -143,6 +143,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		out.println(uma1.getKakuteiChakujun()>0?uma1.getKakuteiChakujun() + "着":"");
 		out.println("</span><br>");
 		out.println("SRUN：" + uma1.getSrun());
+		out.println(uma1.getKyakushitsu());
 		out.println("<br>");
 		out.println("　父： " + uma1.getFather());
 		out.println("<br>");
@@ -225,10 +226,11 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				out.println(uma.getKeibajo());
 				out.println(uma.getTenko());
 				out.println(uma.getShibaBabaJotai().length()>0?uma.getShibaBabaJotai():uma.getDirtBabaJotai());
+				out.println(uma.getJuryoShubetsu());
 				out.println("<br>");
 				out.println("RP：" + uma.getRPCI());
 				out.println("FP：" + uma.getfPCI());
-				out.println(uma.getRaceSrun().doubleValue()>0 ? "RS：" + uma.getRaceSrun().toString() : "RS：<span class=\"srunSmall\">" + uma.getRaceSrun() + "</span>");
+				out.println(uma.getSrun55().doubleValue()>0 ? "RS：" + uma.getSrun55() + "／" + uma.getRaceSrun() : "RS：<span class=\"srunSmall\">" + uma.getSrun55() + "／" + uma.getRaceSrun() + "</span>");
 				out.println("<br>");
 				out.println(uma.getCorner1Juni() + "-" + uma.getCorner2Juni() + "-" + uma.getCorner3Juni() + "-" + uma.getCorner4Juni());
 				out.println(uma.getKyakushitsu());
