@@ -19,32 +19,17 @@ import com.pckeiba.umagoto.UmagotoDataSet;
 import com.pckeiba.umagoto.UmagotoDrunSet;
 
 /**
- * Servlet implementation class ServletTest
+ * Servlet implementation class DanceTableGraph
  */
-@WebServlet("/Race")
-public class RaceSouceServlet extends HttpServlet {
+@WebServlet("/DanceTableGraph")
+public class DanceTableGraph extends HttpServlet {
 	private RaceDataLoader loader;
-
-	@Override
-	public void destroy() {
-		// TODO 自動生成されたメソッド・スタブ
-		super.destroy();
-	}
-
-	//***init()メソッドでサーブレット起動時の動作を指定します
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		// TODO 自動生成されたメソッド・スタブ
-		super.init(config);
-		loader = new RaceDataLoader();
-	}
-
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RaceSouceServlet() {
+    public DanceTableGraph() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -55,13 +40,14 @@ public class RaceSouceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		//URLパラメータからレースコードを取得する
-		String requestPara = request.getParameter("racecode");
-		loader.setRaceData(requestPara,4);
+		String raceCode = request.getParameter("racecode");
+		loader.setRaceData(raceCode, 4);
+
 		//各レース詳細オブジェクトを取得する
 		RaceDataSet raceData = loader.getRaceDataSet();
 		List<UmagotoDataSet> umaList = loader.getNowRaceDataList();
 		List<Map<String,UmagotoDataSet>> umaMap = loader.getKakoRaceDataMapList();
-		Map<String,UmagotoDrunSet> drunList = loader.getDrunList();
+		List<UmagotoDrunSet> drunList = loader.getDrunSortList();
 		UmagotoAnalysis analysis = new UmagotoAnalysis(loader.getUmaLoad());
 
 		//各レース詳細オブジェクトをフォワードする
@@ -70,9 +56,10 @@ public class RaceSouceServlet extends HttpServlet {
 		request.setAttribute("umaList", umaList);
 		request.setAttribute("umaMap", umaMap);
 		request.setAttribute("analysis", analysis);
-		RequestDispatcher di = request.getRequestDispatcher("/WEB-INF/jsp/danceTable.jsp");
-		di.forward(request, response);
 
+		//フォワード
+		RequestDispatcher di = request.getRequestDispatcher("/WEB-INF/jsp/danceTableGraph.jsp");
+		di.forward(request, response);
 	}
 
 	/**
@@ -81,6 +68,13 @@ public class RaceSouceServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		// TODO 自動生成されたメソッド・スタブ
+		super.init(config);
+		loader = new RaceDataLoader();
 	}
 
 }

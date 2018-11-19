@@ -27,6 +27,7 @@ public class RaceDataLoader implements Serializable{
 	private UmagotoDataLoad umaLoad;
 	private Map<Integer,UmagotoDataSet> kakoRaceDataMap;
 	private Map<String,UmagotoDrunSet> drunList;
+	private List<UmagotoDrunSet> drunSortList;
 
 	public RaceDataLoader() {}
 
@@ -77,6 +78,7 @@ public class RaceDataLoader implements Serializable{
 		umaLoad = new UmagotoDataLoad(raceCode,hit);
 		umaList = umaLoad.getList().stream().filter(s -> s.getUmaID()==1).collect(Collectors.toList());
 		umaMapList = new ArrayList<>();
+		drunSortList = new UmagotoDrunLoad(raceCode).getDrunSortList();
 		for(int i=2; i<=hit;i++) {
 			umaMapList.add(umaLoad.getMapFromKettoTorokuBango(i));
 		}
@@ -122,6 +124,14 @@ public class RaceDataLoader implements Serializable{
 
 	public UmagotoDataLoad getUmaLoad() {
 		return umaLoad;
+	}
+
+	public List<UmagotoDrunSet> getDrunSortList() {
+		return drunSortList;
+	}
+
+	public void setDrunSortList(List<UmagotoDrunSet> drunSortList) {
+		this.drunSortList = drunSortList;
 	}
 
 
