@@ -3,6 +3,7 @@
 <%@ page import="com.pckeiba.racedata.RaceDataSet"
          import="com.pckeiba.umagoto.UmagotoDataSet"
          import="com.pckeiba.umagoto.UmagotoDrunSet"
+         import="com.pckeiba.umagoto.UmagotoDataIndexSet"
          import="com.pckeiba.analysis.UmagotoAnalysis"
          import="java.util.List"
          import="java.util.Map"
@@ -19,6 +20,7 @@ RaceDataSet raceData = (RaceDataSet) request.getAttribute("raceData");
 List<UmagotoDataSet> umaNowData = UtilClass.AutoCast(request.getAttribute("umaList"));
 List<Map<String,UmagotoDataSet>> umaKakoData = UtilClass.AutoCast(request.getAttribute("umaMap"));
 List<UmagotoDrunSet> drunList = UtilClass.AutoCast(request.getAttribute("drunList"));
+List<UmagotoDataIndexSet> indexList = UtilClass.AutoCast(request.getAttribute("index"));
 UmagotoAnalysis analysis = (UmagotoAnalysis) request.getAttribute("analysis");
 PrintWriter pw = response.getWriter();
 String kyosoTitle = raceData.getKyosomeiHondai().length()>0
@@ -47,7 +49,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 
 
         <!-- ①チャート描画先を設置 -->
-        <canvas id="myChart" style="width: 100%; height: 600;"></canvas>
+        <canvas id="myChart" style="width: 100%; height: 960px;"></canvas>
 
         <!-- その他内容（任意） -->
 
@@ -61,8 +63,8 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
                 type: 'horizontalBar', // チャートのタイプ
                 data: { // チャートの内容
                 	<%
-                	for(int i = 0; i < drunList.size(); i++){
-                		UmagotoDrunSet uma1 = drunList.get(i);
+                	for(int i = 0; i < indexList.size(); i++){
+                		UmagotoDataIndexSet uma1 = indexList.get(i);
 						if(i==0){
 							out.print("labels: [");
 						}
@@ -80,11 +82,11 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
                         <%
                         for(int i = 0;;i++){
                         	int umaban = i + 1;
-                        	UmagotoDrunSet uma1 = drunList.get(i);
+                        	UmagotoDataIndexSet uma1 = indexList.get(i);
                         	if(i == 0){
                         		out.print("data: [");
                         	}
-                        	out.print(uma1.getDrun().add(BigDecimal.valueOf(12)).multiply(BigDecimal.valueOf(4.5)));
+                        	out.print(uma1.getSpeedRate());
                     		if(i > drunList.size()-2){
                     			out.print("],");
                     			break;
@@ -101,8 +103,9 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
                         yAxes: [{
                             ticks: {
                                 beginAtZero:true,
-                                min: 40,
-                                max: 60
+                                min: 30,
+                                max: 60,
+                                fontSize: 22
                             }
                         }]
                     }
