@@ -35,6 +35,9 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 * umaKakoData = 過去走の馬毎データを取得します
 * drunList = 馬毎のDRunを取得します
 ***************************************************************/
+	String netkeibaRaceCode = raceData.getRaceCode().substring(0, 4) + raceData.getRaceCode().substring(8, 16);
+	String netkeiba = "http://race.netkeiba.com/?pid=race&id=c" + netkeibaRaceCode + "&mode=result";
+	String netkeibaOdds = "http://race.netkeiba.com/?pid=odds&id=c" + netkeibaRaceCode + "&mode=top";
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -75,6 +78,17 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
   	<span><% out.println(raceData.getKyosoKigo()); %></span>
   	<span><% out.print(raceData.getJuryoShubetsu()); %></span>
   	<span><% out.print(raceData.getTorokuTosu() + "頭"); %></span>
+  </div>
+    <div id="menu">
+      <div>
+        <span class ="navi">分析</span>
+      </div>
+          <div>
+            <a href="<% out.print(netkeibaOdds); %>" target="_blank" class ="navi">IPAT</a>
+          </div>
+          <div>
+            <a href="<% out.print(netkeiba); %>" class ="navi">結果</a>
+          </div>
   </div>
 </div>
 
@@ -299,7 +313,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				<td><% out.println(data.getFutanJuryo()); %></td>
 				<td><% out.println(data.getTanshoNinkijun()==0?"-":data.getTanshoNinkijun()); %></td>
 				<td><% out.print(data.getTanshoOdds()==0?"-":data.getTanshoOdds()); %></td>
-				<td><% out.print(data.getBataiju()==0?"-":data.getBataiju()); %></td>
+				<td><% out.print(data.getBataiju()==0?"-":data.getBataiju() + "kg"); %></td>
 				<td class="left"><% out.print("（" + data.getTozaiShozoku().substring(0, 1) + "）" + data.getChokyoshi().replace("　", "")); %></td>
 				<td><% out.print(data.getMoshoku()); %></td>
 			</tr>
@@ -313,7 +327,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				<span><% out.print(indexLoad.getRaceConvoy()); %></span>
 				<h3>ペース</h3>
 				<span><% out.print(indexLoad.getRacePace()); %></span>
-				<h3>逃げ馬</h3>
+				<h3>逃げ</h3>
 				<span>
 				<%
 					List<String> list1 = analysis.getKyakushitsuLabel(1);
@@ -325,7 +339,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 					}
 				%>
 				</span>
-				<h3>先行馬</h3>
+				<h3>先行</h3>
 				<span>
 				<%
 					List<String> list2 = analysis.getKyakushitsuLabel(2);
