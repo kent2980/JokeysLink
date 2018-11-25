@@ -87,7 +87,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
             <a href="<% out.print(netkeibaOdds); %>" target="_blank" class ="navi">IPAT</a>
           </div>
           <div>
-            <a href="<% out.print(netkeiba); %>" class ="navi">結果</a>
+            <a href="<% out.print(netkeiba); %>" target="_blank" class ="navi">結果</a>
           </div>
   </div>
 </div>
