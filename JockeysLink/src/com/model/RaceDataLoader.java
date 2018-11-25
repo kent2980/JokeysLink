@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import com.pckeiba.racedata.RaceDataLoad;
 import com.pckeiba.racedata.RaceDataSet;
 import com.pckeiba.umagoto.UmagotoDataIndexLoad;
-import com.pckeiba.umagoto.UmagotoDataIndexSet;
 import com.pckeiba.umagoto.UmagotoDataLoad;
 import com.pckeiba.umagoto.UmagotoDataSet;
 import com.pckeiba.umagoto.UmagotoDrunLoad;
@@ -30,7 +29,7 @@ public class RaceDataLoader implements Serializable{
 	private Map<Integer,UmagotoDataSet> kakoRaceDataMap;
 	private Map<String,UmagotoDrunSet> drunList;
 	private List<UmagotoDrunSet> drunSortList;
-	private List<UmagotoDataIndexSet> indexList;
+	private UmagotoDataIndexLoad indexLoad;
 
 	public RaceDataLoader() {}
 
@@ -85,7 +84,7 @@ public class RaceDataLoader implements Serializable{
 		for(int i=2; i<=hit;i++) {
 			umaMapList.add(umaLoad.getMapFromKettoTorokuBango(i));
 		}
-		indexList = new UmagotoDataIndexLoad(raceCode, hit).getIndexList();
+		indexLoad = new UmagotoDataIndexLoad(raceCode, 4);
 	}
 
 	/**
@@ -141,8 +140,8 @@ public class RaceDataLoader implements Serializable{
 	/**
 	 * @return 馬毎指数リスト
 	 */
-	public List<UmagotoDataIndexSet> getIndexList() {
-		return indexList;
+	public UmagotoDataIndexLoad getIndexLoad() {
+		return indexLoad;
 	}
 
 

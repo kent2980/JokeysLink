@@ -81,7 +81,7 @@ SelectYearSchedule schedule = (SelectYearSchedule)request.getAttribute("schedule
 		<%
 		if(s.getJusho1().getTokubetsuKyosoBango() != 0){
 		%>
-		<span class="kyosoTitle"><a href="/JockeysLink/Race?racecode=<% out.print(s.getJusho1().getRaceCode()); %>"><% out.print(s.getJusho1().getKyosomeiRyakusho_6()); %></a></span>
+		<span class="kyosoTitle"><a href="/JockeysLink/DanceTableGraph?racecode=<% out.print(s.getJusho1().getRaceCode()); %>"><% out.print(s.getJusho1().getKyosomeiRyakusho_6()); %></a></span>
 		<div class="jushodata kyori small"><% out.print(s.getJusho1().getKyori()>0?s.getJusho1().getKyori() + "m":""); %></div>
 		<span class="jushodata track small"><% out.print(s.getJusho1().getJushoTrack()); %></span>
 		<span class="jushodata juryoshubetsu small"><% out.print(s.getJusho1().getJuryoShubetsu()); %></span>
@@ -91,7 +91,7 @@ SelectYearSchedule schedule = (SelectYearSchedule)request.getAttribute("schedule
 		<%
 		}else{
 		%>
-		<span class="kyosoTitle"><a href="/JockeysLink/Race?racecode=<% out.print(s.getMainKyoso().getRaceCode()); %>"><% out.print(s.getMainKyoso().getKyosomeiRyakusho_6()); %></a></span>
+		<span class="kyosoTitle"><a href="/JockeysLink/DanceTableGraph?racecode=<% out.print(s.getMainKyoso().getRaceCode()); %>"><% out.print(s.getMainKyoso().getKyosomeiRyakusho_6()); %></a></span>
 		<div class="jushodata kyori small"><% out.print(s.getMainKyoso().getKyori()>0?s.getMainKyoso().getKyori() + "m":""); %></div>
 		<span class="jushodata track small"><% out.print(s.getMainKyoso().getJushoTrack()); %></span>
 		<span class="jushodata juryoshubetsu small"><% out.print(s.getMainKyoso().getJuryoShubetsu()); %></span>

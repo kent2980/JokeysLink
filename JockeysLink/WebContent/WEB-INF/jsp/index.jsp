@@ -61,7 +61,7 @@
 					?rs.getKyosomeiRyaku10()
 					:rs.getKyosoShubetsu().substring(rs.getKyosoShubetsu().indexOf("系")+1, rs.getKyosoShubetsu().length()) + rs.getKyosoJoken();
 			out.println("<div>");
-			out.println("<a href=\"/JockeysLink/Race?racecode=" + rs.getRaceCode() + "\">");
+			out.println("<a href=\"/JockeysLink/DanceTableGraph?racecode=" + rs.getRaceCode() + "\">");
 			out.println(rs.getRaceBango() + "R");
 			out.println(rs.getHassoJikoku());
 			out.println(kyosoTitle);
