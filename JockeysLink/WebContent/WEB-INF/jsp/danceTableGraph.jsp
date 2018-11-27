@@ -26,7 +26,7 @@ List<UmagotoDataIndexSet> indexList = indexLoad.getIndexList();
 UmagotoAnalysis analysis = (UmagotoAnalysis) request.getAttribute("analysis");
 PrintWriter pw = response.getWriter();
 String kyosoTitle = raceData.getKyosomeiHondai().length()>0
-				?raceData.getKyosomeiHondai()
+				?raceData.getKyosomeiRyaku10()
 				:raceData.getKyosoShubetsu().substring(raceData.getKyosoShubetsu().indexOf("系")+1, raceData.getKyosoShubetsu().length()) + raceData.getKyosoJoken();
 
 /************************<変数の説明>****************************
@@ -67,17 +67,18 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
     <span class="kaiji"><% out.print(jushoKaiji); %></span>
   	<span class="kyosomei"><% out.print(kyosoTitle); %></span>
   </div>
-  <div class="data courseData">
+  <div class="data courseData desctop">
     <span><% out.print(raceData.getKyori() + "m"); %></span>
     <span><% out.print(raceData.getTrackCode()); %></span>
     <span><% out.print(raceData.getHassoJikoku()); %></span>
   </div>
-  <div class="data raceData">
+  <div class="data raceData desctop">
   	<span><% out.println(raceData.getKyosoJoken()); %></span>
   	<span><% out.println(raceData.getKyosoShubetsu()); %></span>
   	<span><% out.println(raceData.getKyosoKigo()); %></span>
   	<span><% out.print(raceData.getJuryoShubetsu()); %></span>
   	<span><% out.print(raceData.getTorokuTosu() + "頭"); %></span>
+  	<span>＜<% out.print(indexLoad.getDrunMargin(1) + "pt"); %>＞</span>
   </div>
     <div id="menu">
       <div>
@@ -99,7 +100,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
         <!-- ①チャート描画先を設置 -->
         <%
         	int tosu = raceData.getShussoTosu();
-        	int height = tosu < 15 ? 25 : 30;
+        	int height = tosu < 15 ? 30 : 35;
         %>
         <div id="Chart" width:"100%">
         	<h2 class=title>タイムランク</h2>
@@ -128,7 +129,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
                 		for(int i = 0; i < indexList.size(); i++){
                 			UmagotoDataIndexSet uma1 = indexList.get(i);
                     		int umaban = uma1.getUmaban()==0 ? i + 1 : uma1.getUmaban();
-							out.print("\"" + umaban + ". " + uma1.getBamei() + "\"");
+							out.print("\"" + umaban + ". " + uma1.getBamei() + " / " + uma1.getTanshoNinkijun() + "人気\"");
 							if(i + 1 < indexList.size()){
 								out.print(",");
 							}
@@ -212,12 +213,15 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		%>
 		<script>
 		var complexChartOption = {
+				  tooltips: {
+				  },
 	              responsive: true,
                     scales: {
                     	xAxes: [{
                     		ticks: {
                     			autoSkip: false,
-                    			fontSize: 13
+                    			fontSize: 12,
+                    			minRotation: 20
                     		},
                     	}],
                         yAxes: [{
@@ -225,7 +229,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
                                 beginAtZero:true,
                                 min: <% out.print(minYscale); %>,
                                 max: 60,
-                                fontSize: 14
+                                fontSize: 13.5
                             },
                         }],
                     }
@@ -247,20 +251,20 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		<h2>出馬表</h2>
 		<table class="danceTable">
 			<tr>
-				<th>印</th>
 				<th>枠番</th>
 				<th>馬番</th>
+				<th>印</th>
 				<th>馬名</th>
 				<th>性齢</th>
-				<th>脚質</th>
-				<th>平均距離</th>
+				<th class="desctop">脚質</th>
+				<th class="desctop">平均距離</th>
 				<th>騎手</th>
-				<th>斤量</th>
-				<th>単勝人気</th>
-				<th>単勝オッズ</th>
-				<th>馬体重</th>
-				<th>調教師</th>
-				<th>毛色</th>
+				<th class="desctop">斤量</th>
+				<th>人気</th>
+				<th class="desctop">ｵｯｽﾞ</th>
+				<th class="desctop">馬体重</th>
+				<th class="desctop">調教師</th>
+				<th class="desctop">毛色</th>
 			</tr>
 			<% for(int i = 0; i < umaNowData.size(); i++){
 					int umaban = i + 1;
@@ -307,15 +311,15 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				</td>
 				<td class="left"><% out.print(data.getBamei()); %></td>
 				<td><% out.print(data.getSeibetsu() + data.getBarei()); %>
-				<td><% out.print(analysis.getPredictionKyakushitsu(kettoTorokuBango)); %>
-				<td><% out.print(indexLoad.getAverageKyori(kettoTorokuBango)==0?"-":indexLoad.getAverageKyori(kettoTorokuBango) + "m"); %>
+				<td class="desctop"><% out.print(analysis.getPredictionKyakushitsu(kettoTorokuBango)); %>
+				<td class="desctop"><% out.print(indexLoad.getAverageKyori(kettoTorokuBango)==0?"-":indexLoad.getAverageKyori(kettoTorokuBango) + "m"); %>
 				<td><% out.print(data.getKishumei().replace("　", "")); %></td>
-				<td><% out.println(data.getFutanJuryo()); %></td>
+				<td class="desctop"><% out.println(data.getFutanJuryo()); %></td>
 				<td><% out.println(data.getTanshoNinkijun()==0?"-":data.getTanshoNinkijun()); %></td>
-				<td><% out.print(data.getTanshoOdds()==0?"-":data.getTanshoOdds()); %></td>
-				<td><% out.print(data.getBataiju()==0?"-":data.getBataiju() + "kg"); %></td>
-				<td class="left"><% out.print("（" + data.getTozaiShozoku().substring(0, 1) + "）" + data.getChokyoshi().replace("　", "")); %></td>
-				<td><% out.print(data.getMoshoku()); %></td>
+				<td class="desctop"><% out.print(data.getTanshoOdds()==0?"-":data.getTanshoOdds()); %></td>
+				<td class="desctop"><% out.print(data.getBataiju()==0?"-":data.getBataiju() + "kg"); %></td>
+				<td class="left desctop"><% out.print("（" + data.getTozaiShozoku().substring(0, 1) + "）" + data.getChokyoshi().replace("　", "")); %></td>
+				<td class="desctop"><% out.print(data.getMoshoku()); %></td>
 			</tr>
 			<% } %>
 		</table>

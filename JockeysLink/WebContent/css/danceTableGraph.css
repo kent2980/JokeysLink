@@ -33,13 +33,13 @@ body {
 }
 
 #title .roundData {
-	font-size: 1.8em;
-	margin: 1em 1em 0 0;
+    font-size: 2em;
+    margin: 0.8em 1em 0 0;
 }
 
 #kyosomei {
 	margin-top: 1.3em;
-	width: 35em;
+	width: 25em;
 	height: 4.5em;
 }
 
@@ -97,6 +97,7 @@ body {
 	font-size: 21px;
 		color: #fff;
 		text-decoration: none;
+		background-color: rgba(61, 93, 156, 0.89);
 }
 
 .navi:link {
@@ -126,6 +127,7 @@ body {
 	 margin: 8.5em 1.5em 0 1.5em;
 	 box-shadow:2px 2px 6px 1px rgba(17,17,16,0.41);
 	 border-radius:10px 10px 10px 10px ;
+	 padding: 0 0 1em 0;
 }
 
 #Chart .title {
@@ -239,9 +241,9 @@ table .left {
 		#title {
     width: 100%;
     display: flex;
-    padding-left: 2em;
+    padding-left: 1em;
     background-color: rgb(255, 255, 255);
-    height: 8em;
+    height: 10em;
     box-shadow: 1px 1px 1px 1px rgba(75, 75, 75, 0.79);
     border-radius: 0 0 16px 16px;
     position: fixed;
@@ -251,33 +253,40 @@ table .left {
 }
 
 #title .roundData {
-    font-size: 1.2em;
-    padding: 1.4em 1em 0 0;
-    width: 7em;
+    font-size: 2.4em;
+    width: 8em;
+    margin: 1.1em 0 0 0.8em;
 }
 
 #kyosomei {
-    margin-top: 2.5em;
-    width: 22em;
-    height: 50px;
+    margin-top: 1.8em;
+		width: 35em;
 }
 
 #title .kyosomei {
-    font-size: 1.5em;
+font-size: 3.6em;
     font-weight: bold;
+}
+
+#title .kaiji {
+    display: block;
+    font-size: 2em;
+    height: 1.4em;
 }
 
 #title .data {
     margin-top: 6.8em;
-    font-size: 0.7em;
+    font-size: 1em;
 }
 
 #Chart {
+		/* display: none;*/
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.31);
-    margin: 10.5em 1.5em 0 1.5em;
+    margin: 12em 1.5em 0 1.5em;
     box-shadow: 2px 2px 6px 1px rgba(17,17,16,0.41);
     border-radius: 10px 10px 10px 10px;
+ 	 padding: 0 0 1em 0;
 }
 
 		.danceIndex {
@@ -290,17 +299,26 @@ table .left {
     width: auto;
 }
 
+table {
+	font-size: 1.2em;
+}
+
 table,td {
-	font-size: 1em;
-	height: 4em;
+	font-size: 1.5em;
+	height: 6em;
+}
+
+.shirushi {
+    font-size: 1.4em;
 }
 
 #index {
+	display: none;
     margin: 0 2em;
 }
 
 #menu {
-    margin: 6em 0 0 20em;
+    margin: 7.4em 0 0 20em;
     position: fixed;
     display: flex;
 }
@@ -319,6 +337,9 @@ table,td {
     box-shadow: 0px 0px 0px 5px #293b6a;
 }
 
+.desctop {
+	display: none;
+}
   }
 
 @media screen and (min-width: 500px) and (max-width: 999px) and (orientation: landscape) {
@@ -343,20 +364,26 @@ table,td {
 		 margin: 6.5em 1.5em 0 1.5em;
 		 box-shadow:2px 2px 6px 1px rgba(17,17,16,0.41);
 		 border-radius:10px 10px 10px 10px ;
+		 padding: 0 0 1em 0;
 	}
 
 	table {
-		font-size: 10px;
+		font-size: 0.8em;
 	}
 
 	table, td {
+		font-size: 0.8em;
     height: 5em;
 }
 
-	#title .roundData {
+.shirushi {
+    font-size: 1.4em;
+}
+
+#title .roundData {
     font-size: 1.2em;
-    padding: 0.5em 1em 0 0;
     width: 7em;
+    margin: 1.1em 1em 0 0;
 }
 
 #title .kaisai {
@@ -366,7 +393,7 @@ table,td {
 
 #kyosomei {
     margin-top: 1.2em;
-    width: 22em;
+    width: 18em;
     height: 50px;
 }
 
@@ -405,6 +432,7 @@ table,td {
     position: fixed;
     display: flex;
 }
+
 }
 
 
