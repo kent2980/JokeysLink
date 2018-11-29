@@ -34,13 +34,19 @@ body {
 
 #title .roundData {
     font-size: 2em;
-    margin: 0.8em 1em 0 0;
+    margin: 0.8em 0 0 0;
+    min-width: 7.2em;
 }
 
 #kyosomei {
 	margin-top: 1.3em;
-	width: 25em;
+	min-width: 25em;
 	height: 4.5em;
+}
+
+#title .raceSelect {
+    height: 2em;
+    margin: 0.8em 0 0 15em;
 }
 
 #title .kaiji {
@@ -54,9 +60,10 @@ body {
 	font-weight: bold;
 }
 
-#title .data {
-	margin-top: 3.8em;
-	font-size: 1.1em;
+#title #data {
+    margin-top: 1.5em;
+    font-size: 1.1em;
+    display: flex;
 }
 
 #title .raceData {
@@ -253,14 +260,15 @@ table .left {
 }
 
 #title .roundData {
-    font-size: 2.4em;
-    width: 8em;
-    margin: 1.1em 0 0 0.2em;
+    font-size: 2em;
+    margin: 0.8em 0 0 0;
+    min-width: 7.2em;
 }
 
 #kyosomei {
-    margin-top: 1.8em;
-		width: 41em;
+    margin-top: 1.3em;
+    min-width: 25em;
+    height: 4.5em;
 }
 
 #title .kyosomei {
@@ -274,9 +282,18 @@ font-size: 3.6em;
     height: 1.4em;
 }
 
-#title .data {
+#title #data {
     margin-top: 6.8em;
     font-size: 1em;
+		display: none;
+}
+
+#title .raceSelect {
+    height: 2em;
+}
+
+#title .raceData {
+	display: none;
 }
 
 #Chart {
@@ -368,6 +385,7 @@ table,td {
 	}
 
 	table {
+		width: 70em;
 		font-size: 0.8em;
 	}
 
@@ -393,7 +411,7 @@ table,td {
 
 #kyosomei {
     margin-top: 1.2em;
-    width: 18em;
+    min-width: 16em;
     height: 50px;
 }
 
@@ -409,13 +427,23 @@ table,td {
     font-weight: bold;
 }
 
-#title .data {
-    margin-top: 4.8em;
+#title #data {
+    margin-top: 1.3em;
     font-size: 0.7em;
+    display: flex;
 }
 
 #title .raceData {
     margin-left: 2em;
+}
+
+#title .raceSelect {
+    height: 2em;
+}
+
+#title .raceSelect {
+    height: 2em;
+    margin: 0.5em 0 0 7em;
 }
 
 #index .data {
@@ -443,6 +471,7 @@ table,td {
 	}
 
 	table {
+		width: 70em;
 		font-size: 1em;
 	}
 }

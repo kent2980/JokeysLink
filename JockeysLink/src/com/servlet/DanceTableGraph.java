@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.model.RaceDataLoader;
 import com.pckeiba.analysis.UmagotoAnalysis;
 import com.pckeiba.racedata.RaceDataSet;
+import com.pckeiba.schedule.RaceListLoad;
 import com.pckeiba.umagoto.UmagotoDataIndexLoad;
 import com.pckeiba.umagoto.UmagotoDataIndexSet;
 import com.pckeiba.umagoto.UmagotoDataSet;
@@ -26,6 +27,7 @@ import com.pckeiba.umagoto.UmagotoDrunSet;
 @WebServlet("/DanceTableGraph")
 public class DanceTableGraph extends HttpServlet {
 	private RaceDataLoader loader;
+	private RaceListLoad raceList;
 	private static final long serialVersionUID = 1L;
 
     /**
@@ -43,7 +45,9 @@ public class DanceTableGraph extends HttpServlet {
 
 		//URLパラメータからレースコードを取得する
 		String raceCode = request.getParameter("racecode");
+		String kaisai = raceCode.substring(0, 8);
 		loader.setRaceData(raceCode, 4);
+		raceList.setDate(kaisai);
 
 		//各レース詳細オブジェクトを取得する
 		RaceDataSet raceData = loader.getRaceDataSet();
@@ -60,6 +64,7 @@ public class DanceTableGraph extends HttpServlet {
 		request.setAttribute("umaMap", umaMap);
 		request.setAttribute("analysis", analysis);
 		request.setAttribute("index", indexList);
+		request.setAttribute("raceList", raceList);
 
 		//フォワード
 		RequestDispatcher di = request.getRequestDispatcher("/WEB-INF/jsp/danceTableGraph.jsp");
@@ -79,6 +84,7 @@ public class DanceTableGraph extends HttpServlet {
 		// TODO 自動生成されたメソッド・スタブ
 		super.init(config);
 		loader = new RaceDataLoader();
+		raceList = new RaceListLoad();
 	}
 
 }

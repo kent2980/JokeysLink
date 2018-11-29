@@ -6,6 +6,8 @@
          import="com.pckeiba.umagoto.UmagotoDataIndexLoad"
          import="com.pckeiba.umagoto.UmagotoDataIndexSet"
          import="com.pckeiba.analysis.UmagotoAnalysis"
+         import="com.pckeiba.schedule.RaceListLoad"
+         import="com.pckeiba.racedata.RaceDataDefault"
          import="java.util.List"
          import="java.util.Map"
          import="java.io.PrintWriter"
@@ -24,6 +26,7 @@ List<UmagotoDrunSet> drunList = UtilClass.AutoCast(request.getAttribute("drunLis
 UmagotoDataIndexLoad indexLoad = UtilClass.AutoCast(request.getAttribute("index"));
 List<UmagotoDataIndexSet> indexList = indexLoad.getIndexList();
 UmagotoAnalysis analysis = (UmagotoAnalysis) request.getAttribute("analysis");
+RaceListLoad raceList = UtilClass.AutoCast(request.getAttribute("raceList"));
 PrintWriter pw = response.getWriter();
 String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				?raceData.getKyosomeiRyaku10()
@@ -67,18 +70,43 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
     <span class="kaiji"><% out.print(jushoKaiji); %></span>
   	<span class="kyosomei"><% out.print(kyosoTitle); %></span>
   </div>
-  <div class="data courseData desctop">
-    <span><% out.print(raceData.getKyori() + "m"); %></span>
-    <span><% out.print(raceData.getTrackCode()); %></span>
-    <span><% out.print(raceData.getHassoJikoku()); %></span>
-  </div>
-  <div class="data raceData desctop">
-  	<span><% out.println(raceData.getKyosoJoken()); %></span>
-  	<span><% out.println(raceData.getKyosoShubetsu()); %></span>
-  	<span><% out.println(raceData.getKyosoKigo()); %></span>
-  	<span><% out.print(raceData.getJuryoShubetsu()); %></span>
-  	<span><% out.print(raceData.getTorokuTosu() + "頭"); %></span>
-  	<span>＜<% out.print(indexLoad.getDrunMargin(1) + "pt"); %>＞</span>
+  <div class="raceData">
+	  <div class="raceSelect">
+	  	<form name="fm">
+		  	<select name="s" class="raceSelect" onchange="urlJump()">
+		  		<option value="" hidden disabled selected></option>
+		  		<%
+	  			List<RaceDataDefault> raceDataList = raceList.getRaceList();
+		  		for(int i = 0; i < raceDataList.size(); i++){
+		  			RaceDataDefault race = raceDataList.get(i);
+		  			boolean raceCodeEquals = raceData.getRaceCode().equals(race.getRaceCode());
+		  			String kyosomei = race.getKyosomeiHondai().length()>0
+		  									?race.getKyosomeiRyaku10()
+		  									:race.getKyosoShubetsu().substring(race.getKyosoShubetsu().indexOf("系")+1, race.getKyosoShubetsu().length()) + race.getKyosoJoken();
+		  			String selectKyosomei = race.getKeibajo() + " - " + String.format("%02d", race.getRaceBango()) + "R　" + kyosomei;
+		  		%>
+		  		<option<% out.print(raceCodeEquals == true?" selected":""); %> value="/JockeysLink//DanceTableGraph?racecode=<% out.print(race.getRaceCode()); %>"><% out.print(selectKyosomei); %></option>
+		  		<%
+		  		}
+		  		%>
+		  	</select>
+	  	</form>
+	  </div>
+	  <div id="data">
+		  <div class="courseData desctop">
+		    <span><% out.print(raceData.getKyori() + "m"); %></span>
+		    <span><% out.print(raceData.getTrackCode()); %></span>
+		    <span><% out.print(raceData.getHassoJikoku()); %></span>
+		  </div>
+		  <div class="raceData desctop">
+		  	<span><% out.println(raceData.getKyosoJoken()); %></span>
+		  	<span><% out.println(raceData.getKyosoShubetsu()); %></span>
+		  	<span><% out.println(raceData.getKyosoKigo()); %></span>
+		  	<span><% out.print(raceData.getJuryoShubetsu()); %></span>
+		  	<span><% out.print(raceData.getTorokuTosu() + "頭"); %></span>
+		  	<span>＜<% out.print(indexLoad.getDrunMargin(1) + "pt"); %>＞</span>
+		  </div>
+	  </div>
   </div>
     <div id="menu">
       <div>
@@ -93,6 +121,13 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
   </div>
 </div>
 
+<!-- URLジャンプのJavaScript -->
+<script type="text/javascript">
+function urlJump() {
+    var browser = document.fm.s.value;
+    location.href = browser;
+}
+</script>
 <!-- *****************************************************************************************
      ********************************ここからグラフを記述する*****************************************
      ***************************************************************************************** -->
@@ -296,6 +331,8 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				%>
 				<td class="waku<% out.print(data.getWakuban()); %>"<% out.print(key); %>><% out.print(data.getWakuban()==0?"仮":data.getWakuban()); %></td>
 				<%
+					}else{
+						out.print(data.getWakuban()==0?"<td>仮</td>":"");
 					}
 				%>
 				<td><% out.print(data.getUmaban()==0 ? umaban : data.getUmaban()); %></td>
