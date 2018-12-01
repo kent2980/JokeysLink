@@ -40,7 +40,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 ***************************************************************/
 	String netkeibaRaceCode = raceData.getRaceCode().substring(0, 4) + raceData.getRaceCode().substring(8, 16);
 	String netkeiba = "http://race.netkeiba.com/?pid=race&id=c" + netkeibaRaceCode + "&mode=result";
-	String netkeibaOdds = "http://race.netkeiba.com/?pid=odds&id=c" + netkeibaRaceCode + "&mode=top";
+	String netkeibaOdds = "https://ipat.netkeiba.com/?pid=ipat_input&rid=" + netkeibaRaceCode;
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
