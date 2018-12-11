@@ -96,7 +96,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 	out.println(raceData.getShibaJotai().length()>0?raceData.getShibaJotai():raceData.getDirtJotai());
 	out.println("RPCI：" + raceData.getRPCI());
 	out.println("AVE3F：" + raceData.getAve3f());
-	out.println("RS：" + raceData.getSrun55());
+	out.println("RS：" + raceData.getSrunRow());
 	%>
 </span>
 </div>

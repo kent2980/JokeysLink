@@ -104,7 +104,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		  	<span><% out.println(raceData.getKyosoKigo()); %></span>
 		  	<span><% out.print(raceData.getJuryoShubetsu()); %></span>
 		  	<span><% out.print(raceData.getTorokuTosu() + "頭"); %></span>
-		  	<span>＜<% out.print(indexLoad.getDrunMargin(1) + "pt"); %>＞</span>
+		  	<!--  <span>＜<% //out.print(indexLoad.getDrunMargin(1) + "pt"); %>＞</span> -->
 		  </div>
 	  </div>
   </div>
@@ -227,8 +227,28 @@ function urlJump() {
 								}
                     		}
                     	%>],
-                    	borderColor : 'rgba(54,164,235,0.5)',
+                    	borderColor : 'rgba(54,164,235)',
                         backgroundColor : 'rgba(54,164,235,0.5)'
+                    },
+                    {
+                    	type: 'line',
+                    	label: '1走前タイムランク',
+                    	data: [<%
+                    		for(int i = 0; i < indexList.size(); i++){
+                    			String kettoBango = indexList.get(i).getKettoTorokuBango();
+                    			UmagotoDataSet uma1 = umaKakoData.get(0).get(kettoBango);
+                    			try{
+    								out.print((uma1.getSrun().add(BigDecimal.valueOf(12))).multiply(BigDecimal.valueOf(4.5)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                    			}catch(NullPointerException e){
+                    				out.print("0");
+                    			}
+								if(i + 1 < indexList.size()){
+									out.print(",");
+								}
+                    		}
+                    	%>],
+                    	borderColor : 'rgba(254,164,65)',
+                        backgroundColor : 'rgba(254,164,65,0.1)'
                     }
                     ],
             };
@@ -263,7 +283,7 @@ function urlJump() {
                             ticks: {
                                 beginAtZero:true,
                                 min: <% out.print(minYscale); %>,
-                                max: 60,
+                                max: 70,
                                 fontSize: 13.5
                             },
                         }],

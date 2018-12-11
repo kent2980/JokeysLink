@@ -13,19 +13,44 @@
          import="com.util.UtilClass"
 %>
 <%
-	RaceListLoad raceListloader = UtilClass.AutoCast(request.getAttribute("raceListloader"));
+	RaceListLoad raceListLoader = UtilClass.AutoCast(request.getAttribute("raceListloader"));
+	List<RaceDataDefault> raceList = raceListLoader.getRaceList(raceListLoader.getKeibajoList().get(0));
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="../css/StyleDanceTable.css" rel="stylesheet">
-<link href="/JockeysLink/css/StyleDanceTable.css" rel="stylesheet">
-<title><% out.print(raceListloader.getDate()); %></title>
+<link href="../css/newIndex.css" rel="stylesheet">
+<link href="/JockeysLink/css/newIndex.css" rel="stylesheet">
+<title>トップページ</title>
 </head>
-
 <body>
-
+	<div id="body">
+		<div class="heightMenu">
+		</div>
+		<div class="raceList">
+			<table>
+				<%
+				for(int i = 0; i < raceList.size(); i++){
+				%>
+				<tr>
+				<%
+					RaceDataDefault raceData = raceList.get(i);
+					String kyosoTitle = raceData.getKyosomeiHondai().length()>0
+							?raceData.getKyosomeiRyaku10()
+							:raceData.getKyosoShubetsu().substring(raceData.getKyosoShubetsu().indexOf("系")+1, raceData.getKyosoShubetsu().length()) + raceData.getKyosoJoken();
+					out.print("<td>" + raceData.getRaceBango() + "R" + "</td>");
+					out.print("<td>" + kyosoTitle + "</td>");
+				%>
+				</tr>
+				<%
+				}
+				%>
+			</table>
+		</div>
+	</div>
+	<div id="weightBody">
+	</div>
 </body>
 </html>

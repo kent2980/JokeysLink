@@ -19,7 +19,7 @@ import com.pckeiba.schedule.RaceListLoad;
 /**
  * Servlet implementation class NewIndexServlet
  */
-@WebServlet("/NewIndexServlet")
+@WebServlet("/NewIndex")
 public class NewIndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
