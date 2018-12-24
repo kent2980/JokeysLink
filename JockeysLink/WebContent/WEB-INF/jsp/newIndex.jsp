@@ -23,6 +23,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="../css/newIndex.css" rel="stylesheet">
 <link href="/JockeysLink/css/newIndex.css" rel="stylesheet">
+<link rel="shortcut icon" href="/JockeysLink/icon/kyosoba_3.ico">
 <title>トップページ</title>
 </head>
 <body>

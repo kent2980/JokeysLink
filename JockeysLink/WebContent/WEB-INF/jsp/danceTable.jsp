@@ -32,6 +32,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
 <link href="../css/StyleDanceTable.css" rel="stylesheet">
 <link href="/JockeysLink/css/StyleDanceTable.css" rel="stylesheet">
+<link rel="shortcut icon" href="/JockeysLink/icon/kyosoba_3.ico">
 <title><%= raceData.getKaisaiNenGappi() + " " + kyosoTitle %></title>
 </head>
 <body id="raceData">

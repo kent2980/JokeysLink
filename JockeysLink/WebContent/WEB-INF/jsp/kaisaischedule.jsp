@@ -16,7 +16,8 @@ SelectYearSchedule schedule = (SelectYearSchedule)request.getAttribute("schedule
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="../css/StyleDanceTable.css" rel="stylesheet">
 <link href="/JockeysLink/css/StyleDanceTable.css" rel="stylesheet">
-<title>開催スケジュール</title>
+<link rel="shortcut icon" href="/JockeysLink/icon/kyosoba_3.ico">
+<title>Jockey's Link</title>
 </head>
 <body>
 

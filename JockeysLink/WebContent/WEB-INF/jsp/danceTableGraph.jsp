@@ -50,6 +50,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
 <link href="../css/danceTableGraph.css" rel="stylesheet">
 <link href="/JockeysLink/css/danceTableGraph.css" rel="stylesheet">
+<link rel="shortcut icon" href="/JockeysLink/icon/kyosoba_3.ico">
 <title><%out.print(kyosoTitle); %></title>
 </head>
 <body>
