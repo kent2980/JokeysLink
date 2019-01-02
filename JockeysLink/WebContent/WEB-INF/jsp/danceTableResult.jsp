@@ -17,8 +17,12 @@
    		 import="java.time.LocalDate"
    		 import="java.util.HashMap"
    		 import="java.util.ArrayList"
+   		 import="java.util.Collections"
    		 import="java.time.LocalDate"
+   		 import="java.time.LocalDateTime"
    		 import="java.time.format.DateTimeFormatter"
+   		 import="java.util.stream.Collectors"
+   		 import="java.util.Comparator"
 %>
 <%
 RaceDataSet raceData = (RaceDataSet) request.getAttribute("raceData");
@@ -56,7 +60,6 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 <title><%out.print(kyosoTitle); %></title>
 </head>
 <body>
-
 <!-- *****************************************************************************************
      *****************************************************************************************
      							レースデータを記述します
@@ -96,7 +99,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 		  									:race.getKyosoShubetsu().substring(race.getKyosoShubetsu().indexOf("系")+1, race.getKyosoShubetsu().length()) + race.getKyosoJoken();
 		  			String selectKyosomei = race.getKeibajo() + " - " + String.format("%02d", race.getRaceBango()) + "R　" + kyosomei;
 		  		%>
-		  		<option<% out.print(raceCodeEquals == true?" selected":""); %> value="/JockeysLink/DanceTableGraph?racecode=<% out.print(race.getRaceCode()); %>&mode=dance"><% out.print(selectKyosomei); %></option>
+		  		<option<% out.print(raceCodeEquals == true?" selected":""); %> value="/JockeysLink/DanceTableGraph?racecode=<% out.print(race.getRaceCode()); %>&mode=result"><% out.print(selectKyosomei); %></option>
 		  		<%
 		  		}
 		  		%>
@@ -121,7 +124,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
   </div>
     <div id="menu">
       <div>
-        <span class ="navi">分析</span>
+        <a href="/JockeysLink/DanceTableGraph?racecode=<% out.print(raceData.getRaceCode()); %>&mode=dance" class ="navi">出馬表</a>
       </div>
           <div>
             <a href="<% out.print(netkeibaOdds); %>" target="_blank" class ="navi">IPAT</a>
@@ -156,6 +159,29 @@ function urlJump() {
         <!-- ②Chart.jsの読み込み -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
 
+<!-- ********************** id(myChart)のセッティング **********************-->
+		<%
+			//リストを確定着順でソートします
+			Collections.sort(indexList);
+			//失格馬をリストの最後尾に移動します
+			List<UmagotoDataIndexSet> errorList = new ArrayList<>();
+			for(UmagotoDataIndexSet set: indexList){
+				if(set.getKauteiChakujun() == 0){
+					errorList.add(set);
+				}
+			}
+			indexList = indexList.stream()
+								 .filter(s -> s.getKauteiChakujun() > 0)
+								 .collect(Collectors.toList());
+			try{
+				for(UmagotoDataIndexSet set: errorList){
+					indexList.add(set);
+				}
+			}catch(IndexOutOfBoundsException e){
+				errorList = null;
+			}
+		%>
+
 		<!-- ③チャート描画情報の作成 -->
 		<script>
 			window.onload = function() {
@@ -183,8 +209,12 @@ function urlJump() {
                 			DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("y／M／d");
                 			LocalDate ld = LocalDate.parse(kaisaiNenGappi, dtf1);
                 			kaisaiNenGappi = dtf2.format(ld);
+                			//ラベル内のデータを準備します
+                			String bamei = uma1.getBamei();
+                			int ninkijun = uma1.getTanshoNinkijun();
+                			String ninki = ninkijun>0?String.valueOf(ninkijun):"-";
                 			//ラベルを出力します
-							out.print("[\"" + umaban + ". " + uma1.getBamei() + " / " + uma1.getTanshoNinkijun() + "人気\", \"（前走：" + kaisaiNenGappi + "）\"]");
+							out.print("[\"" + umaban + ". " + uma1.getBamei() + " / " + ninki + "人気\", \"（前走：" + kaisaiNenGappi + "）\"]");
 							if(i + 1 < indexList.size()){
 								out.print(",");
 							}
@@ -333,154 +363,133 @@ function urlJump() {
             };
         </script>
 
-<!-- *****************************************************************************************
-     **********************************グラフ記述ここまで*******************************************
-     ***************************************************************************************** -->
 
-<!-- *****************************************************************************************
-*********************************							**********************************
-*********************************	テーブルを作成します(*´ω｀*)	**********************************
-*********************************							**********************************************************
-********************************************************************************************************************** -->
+<!-- ****************** グラフ切り替えボタン ******************-->
 
-	<div class="danceIndex">
-		<div class="tableTitle">
-		<h2>出馬表</h2>
-		<table class="danceTable">
-			<tr>
-				<th>枠番</th>
-				<th>馬番</th>
-				<th>印</th>
-				<th>馬名</th>
-				<th>性齢</th>
-				<th class="desctop">脚質</th>
-				<th class="desctop">平均距離</th>
-				<th>騎手</th>
-				<th class="desctop">斤量</th>
-				<th>人気</th>
-				<th class="desctop">ｵｯｽﾞ</th>
-				<th class="desctop">馬体重</th>
-				<th class="desctop">調教師</th>
-				<th class="desctop">毛色</th>
-			</tr>
-			<% for(int i = 0; i < umaNowData.size(); i++){
-					int umaban = i + 1;
-					UmagotoDataSet data = umaNowData.get(i);
-					String kettoTorokuBango = data.getKettoTorokuBango();
-					//枠番が同じ場合に結合を行います
-					int wakuban = data.getWakuban();
-					int previousWakuban = 0;
-					int nextWakuban = 0;
-					int thirdWakuban = 0;
-					if(i > 0)
-						previousWakuban = umaNowData.get(i - 1).getWakuban();
-					try{
-						nextWakuban = umaNowData.get(i + 1).getWakuban();
-						try{
-							thirdWakuban = umaNowData.get(i + 2).getWakuban();
-						}catch(IndexOutOfBoundsException e2){
-							thirdWakuban = 0;
-						}
-					}catch(IndexOutOfBoundsException e){
-						nextWakuban = 0;
-					}
-					String key = (wakuban * wakuban) == (nextWakuban * thirdWakuban) ? " rowspan=\"3\"" : wakuban == nextWakuban ? " rowspan=\"2\"" : "";
-					boolean wakuHantei = wakuban == previousWakuban;
-			%>
-			<tr>
-				<%
-					if(wakuHantei == false){
-				%>
-				<td class="waku<% out.print(data.getWakuban()); %>"<% out.print(key); %>><% out.print(data.getWakuban()==0?"仮":data.getWakuban()); %></td>
-				<%
-					}else{
-						out.print(data.getWakuban()==0?"<td>仮</td>":"");
-					}
-				%>
-				<td><% out.print(data.getUmaban()==0 ? umaban : data.getUmaban()); %></td>
-				<td>
-					<select name="shirushi" class="shirushi">
-						<option selected></option>
-						<option value="marumaru">◎</option>
-						<option value="maru">〇</option>
-						<option value="kurosankaku">▲</option>
-						<option value="sankaku">△</option>
-						<option value="star">★</option>
-					</select>
-				</td>
-				<td class="left"><% out.print(data.getBamei()); %></td>
-				<td><% out.print(data.getSeibetsu() + data.getBarei()); %>
-				<td class="desctop"><% out.print(analysis.getPredictionKyakushitsu(kettoTorokuBango)); %>
-				<td class="desctop"><% out.print(indexLoad.getAverageKyori(kettoTorokuBango)==0?"-":indexLoad.getAverageKyori(kettoTorokuBango) + "m"); %>
-				<td><% out.print(data.getKishumei().replace("　", "")); %></td>
-				<td class="desctop"><% out.println(data.getFutanJuryo()); %></td>
-				<td><% out.println(data.getTanshoNinkijun()==0?"-":data.getTanshoNinkijun()); %></td>
-				<td class="desctop"><% out.print(data.getTanshoOdds()==0?"-":data.getTanshoOdds()); %></td>
-				<td class="desctop"><% out.print(data.getBataiju()==0?"-":data.getBataiju() + "kg"); %></td>
-				<td class="left desctop"><% out.print("（" + data.getTozaiShozoku().substring(0, 1) + "）" + data.getChokyoshi().replace("　", "")); %></td>
-				<td class="desctop"><% out.print(data.getMoshoku()); %></td>
-			</tr>
-			<% } %>
-		</table>
-		</div>
-		<div id="index">
-			<h2>展開予想</h2>
-			<div class="data">
-				<h3>隊列</h3>
-				<span><% out.print(indexLoad.getRaceConvoy()); %></span>
-				<h3>ペース</h3>
-				<span><% out.print(indexLoad.getRacePace()); %></span>
-				<h3>逃げ</h3>
-				<span>
-				<%
-					List<String> list1 = analysis.getKyakushitsuLabel(1);
-					for(int i = 0; i < list1.size();i++){
-						out.print(list1.get(i));
-						if(i + 1 < list1.size()){
-							out.print("、");
-						}
-					}
-				%>
-				</span>
-				<h3>先行</h3>
-				<span>
-				<%
-					List<String> list2 = analysis.getKyakushitsuLabel(2);
-					for(int i = 0; i < list2.size();i++){
-						out.print(list2.get(i));
-						if(i + 1 < list2.size()){
-							out.print("、");
-						}
-					}
-				%>
-				</span>
-				<h3>差し</h3>
-				<span>
-				<%
-					List<String> list3 = analysis.getKyakushitsuLabel(3);
-					for(int i = 0; i < list3.size();i++){
-						out.print(list3.get(i));
-						if(i + 1 < list3.size()){
-							out.print("、");
-						}
-					}
-				%>
-				</span>
-				<h3>追込み</h3>
-				<span>
-				<%
-					List<String> list4 = analysis.getKyakushitsuLabel(4);
-					for(int i = 0; i < list4.size();i++){
-						out.print(list4.get(i));
-						if(i + 1 < list4.size()){
-							out.print("、");
-						}
-					}
-				%>
-				</span>
-	    	</div>
-    	</div>
-	</div>
 
+<!-- ***************************************************************************************
+     **********************				youtube埋め込み動画			************************
+     *************************************************************************************** -->
+<%
+	String dateKey = raceData.getKaisaiNenGappi();
+	DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy年MM月dd日");
+	DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("y／M／d");
+	LocalDate ld = LocalDate.parse(dateKey, dtf1);
+	dateKey = ld.toString();
+	String kaisaiKey = raceData.getKeibajo() + raceData.getRaceBango() + "R";
+	String bameiKey = raceData.getWinningHorse();
+	String searchKey = dateKey + " " + kaisaiKey + " " + bameiKey;
+%>
+<div id="youtube">
+<div class="youtube" data-video="https://www.youtube.com/embed?listType=search&list=<% out.print(searchKey); %>">
+	<iframe width="480" height="270" src="https://www.youtube.com/embed?listType=search&list=<% out.print(searchKey); %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	<!-- <img src="https://img.youtube.com/vi/動画ID/mqdefault.jpg" alt="" width="320" height="180" /> -->
+</div>
+</div>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.3.min.js"></script>
+<script>// <![CDATA[
+$('.youtube').click(function(){
+video = '<iframe src="'+ $(this).attr('data-video') +'" frameborder="0" width="480" height="270"></iframe>';
+$(this).replaceWith(video);
+});
+// ]]>
+</script>
+
+<!-- ***************************************************************************************
+     **********************					着順掲示板				************************
+     *************************************************************************************** -->
+     <%
+     //umaNowDataを着順でソートします
+     Collections.sort(umaNowData, new Comparator<UmagotoDataSet>(){
+    	@Override
+    	 public int compare(UmagotoDataSet o1, UmagotoDataSet o2){
+    		 int chakujun1 = o1.getKakuteiChakujun();
+    		 int chakujun2 = o2.getKakuteiChakujun();
+    		 if(chakujun1 > chakujun2){
+    			 return 1;
+    		 }else if(chakujun1 == chakujun2){
+    			 return 0;
+    		 }else{
+    			 return -1;
+    		 }
+    	}
+     });
+		//失格馬をリストの最後尾に移動します
+		List<UmagotoDataSet> errorList2 = new ArrayList<>();
+		for(UmagotoDataSet set: umaNowData){
+			if(set.getKakuteiChakujun() == 0){
+				errorList2.add(set);
+			}
+		}
+		umaNowData = umaNowData.stream()
+							 .filter(s -> s.getKakuteiChakujun() > 0)
+							 .collect(Collectors.toList());
+		try{
+			for(UmagotoDataSet set: errorList2){
+				umaNowData.add(set);
+			}
+		}catch(IndexOutOfBoundsException e){
+			errorList2 = null;
+		}
+     %>
+<div id="result">
+<table>
+	<tr>
+		<th>着順</th>
+		<th>枠番</th>
+		<th>馬番</th>
+		<th>馬名</th>
+		<th>性齢</th>
+		<th>斤量</th>
+		<th>騎手</th>
+		<th>人気</th>
+		<th>オッズ</th>
+		<th>後半3F</th>
+		<th>タイム</th>
+		<th>スピード指数</th>
+		<th>通過順位</th>
+		<th>調教師</th>
+	</tr>
+	<% for(int i = 0; i < indexList.size(); i++) {
+			UmagotoDataSet dataSet = umaNowData.get(i);
+			StringBuilder tsukaJuni = new StringBuilder();
+			//角通過順位を纏めます
+			if(dataSet.getCorner1Juni() > 0){
+				tsukaJuni.append(dataSet.getCorner1Juni());
+			}if(dataSet.getCorner2Juni() > 0){
+				if(dataSet.getCorner1Juni() > 0)
+				tsukaJuni.append("-");
+				tsukaJuni.append(dataSet.getCorner2Juni());
+			}if(dataSet.getCorner3Juni() > 0){
+				if(dataSet.getCorner2Juni() > 0)
+				tsukaJuni.append("-");
+				tsukaJuni.append(dataSet.getCorner3Juni());
+			}if(dataSet.getCorner4Juni() > 0){
+				if(dataSet.getCorner3Juni() > 0)
+				tsukaJuni.append("-");
+				tsukaJuni.append(dataSet.getCorner4Juni());
+			}
+			//異常区分のフラグを作成します
+			boolean ijoFlag = dataSet.getKakuteiChakujun() == 0 ? true : false;
+	%>
+	<tr>
+		<td><% out.print(ijoFlag==false?dataSet.getKakuteiChakujun():"-"); %></td>
+		<td class="waku<% out.print(dataSet.getWakuban()); %>"><% out.print(dataSet.getWakuban()); %></td>
+		<td><% out.print(dataSet.getUmaban()); %></td>
+		<td><% out.print(dataSet.getBamei()); %></td>
+		<td><% out.print(dataSet.getSeibetsu() + dataSet.getBarei()); %></td>
+		<td><% out.print(dataSet.getFutanJuryo()); %></td>
+		<td><% out.print(dataSet.getKishumei().replace("　", "")); %></td>
+		<td><% out.print(ijoFlag==false?dataSet.getTanshoNinkijun():""); %></td>
+		<td><% out.print(ijoFlag==false?dataSet.getTanshoOdds():""); %></td>
+		<td><% out.print(ijoFlag==false?dataSet.getKohan3F():""); %></td>
+		<td><% out.print(ijoFlag==false?dataSet.getSohaTimeValue():dataSet.getIjoKubun()); %></td>
+		<td><% out.print(ijoFlag==false?dataSet.getSrun():""); %></td>
+		<td><% out.print(ijoFlag==false?tsukaJuni.toString():""); %></td>
+		<td><% out.print("（" + dataSet.getTozaiShozoku().substring(0, 1) + "）" + dataSet.getChokyoshi().replace("　", "")); %></td>
+	</tr>
+	<% } %>
+</table>
+</div>
 </body>
 </html>

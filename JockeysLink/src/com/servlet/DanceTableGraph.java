@@ -17,7 +17,6 @@ import com.pckeiba.analysis.UmagotoAnalysis;
 import com.pckeiba.racedata.RaceDataSet;
 import com.pckeiba.schedule.RaceListLoad;
 import com.pckeiba.umagoto.UmagotoDataIndexLoad;
-import com.pckeiba.umagoto.UmagotoDataIndexSet;
 import com.pckeiba.umagoto.UmagotoDataSet;
 import com.pckeiba.umagoto.UmagotoDrunSet;
 
@@ -45,6 +44,7 @@ public class DanceTableGraph extends HttpServlet {
 
 		//URLパラメータからレースコードを取得する
 		String raceCode = request.getParameter("racecode");
+		String mode = request.getParameter("mode");
 		String kaisai = raceCode.substring(0, 8);
 		loader.setRaceData(raceCode, 4);
 		raceList.setDate(kaisai);
@@ -67,7 +67,14 @@ public class DanceTableGraph extends HttpServlet {
 		request.setAttribute("raceList", raceList);
 
 		//フォワード
-		RequestDispatcher di = request.getRequestDispatcher("/WEB-INF/jsp/danceTableGraph.jsp");
+		RequestDispatcher di = null;
+		switch(mode) {
+		case "dance":
+			di = request.getRequestDispatcher("/WEB-INF/jsp/danceTableGraph.jsp");
+			break;
+		case "result":
+			di = request.getRequestDispatcher("/WEB-INF/jsp/danceTableResult.jsp");
+		}
 		di.forward(request, response);
 	}
 
