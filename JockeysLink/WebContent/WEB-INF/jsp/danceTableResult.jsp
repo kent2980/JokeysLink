@@ -59,7 +59,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 <link rel="shortcut icon" href="/JockeysLink/icon/kyosoba_3.ico">
 <title><%out.print(kyosoTitle); %></title>
 </head>
-<body>
+<body id="result">
 <!-- *****************************************************************************************
      *****************************************************************************************
      							レースデータを記述します
@@ -145,7 +145,7 @@ function urlJump() {
 <!-- *****************************************************************************************
      ********************************ここからグラフを記述する*****************************************
      ***************************************************************************************** -->
-
+<div class="sideBy graph">
         <!-- ①チャート描画先を設置 -->
         <%
         	int tosu = raceData.getShussoTosu();
@@ -214,7 +214,7 @@ function urlJump() {
                 			int ninkijun = uma1.getTanshoNinkijun();
                 			String ninki = ninkijun>0?String.valueOf(ninkijun):"-";
                 			//ラベルを出力します
-							out.print("[\"" + umaban + ". " + uma1.getBamei() + " / " + ninki + "人気\", \"（前走：" + kaisaiNenGappi + "）\"]");
+							out.print("\"" + umaban + ". " + uma1.getBamei() + " / " + ninki + "人気\"");
 							if(i + 1 < indexList.size()){
 								out.print(",");
 							}
@@ -381,10 +381,8 @@ function urlJump() {
 	String searchKey = dateKey + " " + kaisaiKey + " " + bameiKey;
 %>
 <div id="youtube">
-<div class="youtube" data-video="https://www.youtube.com/embed?listType=search&list=<% out.print(searchKey); %>">
 	<iframe width="480" height="270" src="https://www.youtube.com/embed?listType=search&list=<% out.print(searchKey); %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	<!-- <img src="https://img.youtube.com/vi/動画ID/mqdefault.jpg" alt="" width="320" height="180" /> -->
-</div>
 </div>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.3.min.js"></script>
 <script>// <![CDATA[
@@ -394,7 +392,7 @@ $(this).replaceWith(video);
 });
 // ]]>
 </script>
-
+</div>
 <!-- ***************************************************************************************
      **********************					着順掲示板				************************
      *************************************************************************************** -->
@@ -432,7 +430,7 @@ $(this).replaceWith(video);
 			errorList2 = null;
 		}
      %>
-<div id="result">
+<div id="resultTable">
 <table>
 	<tr>
 		<th>着順</th>

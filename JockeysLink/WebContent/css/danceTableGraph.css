@@ -9,6 +9,10 @@ body {
 	background-image: url(../picture/backimage_003.png);
 }
 
+.sideBy {
+    display: flex;
+}
+
 /*******************************************
 *************タイトルバー********************
 ********************************************/
@@ -151,7 +155,7 @@ body {
 .Chart {
 	background-color: rgba(255, 255, 255, 0.8);
 	border: 1px solid rgba(0, 0, 0, 0.31);
-	 margin: 8.5em 1.5em 0 1.5em;
+	margin: 0.5em 15px 0 auto;
 	 box-shadow:2px 2px 6px 1px rgba(17,17,16,0.41);
 	 border-radius:10px 10px 10px 10px ;
 	 padding: 0 0 1em 0;
@@ -172,6 +176,16 @@ body {
 
 #graphButton.ninki:active #ninkiChart {
 	visibility:visible;
+}
+
+#result div#timeChart {
+    width: 960px;
+}
+
+#result .sideBy.graph {
+    padding-top: 8em;
+    margin-bottom: 1.5em;
+    height: 420px;
 }
 /********************************************************
 ********	テーブル部のスタイルを作ります。(*^▽^*)		*********
@@ -224,16 +238,16 @@ table .left {
 	padding-left: 1em;
 }
 
-#result td  {
+#resultTable td  {
 	height: 2.2em;
 }
 
-#result table {
+#resultTable table {
 	margin: auto;
 	width: 90em;
 }
 
-#result {
+#resultTable {
 	margin-bottom: 2em;
 }
 /****枠番で色を設定する****/
@@ -286,12 +300,17 @@ table .left {
 
 /****youtube埋め込み動画のレイアウト****/
 #youtube {
-    float: right;
-    width: 520px;
-    padding: 2em 0 2em 0;
+    position: relative;
+    width: 480px;
+    height: 70%;
+    margin: 50px auto 0 15px;
 }
-.youtube {
-    overflow: hidden;
+#youtube iframe {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100% !important;
+  height: 100% !important;
 }
 @media screen and (orientation: portrait) {
     /*　縦画面で適用　*/
