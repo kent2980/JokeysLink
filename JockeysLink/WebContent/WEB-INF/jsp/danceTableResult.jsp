@@ -354,7 +354,7 @@ function urlJump() {
                         yAxes: [{
                             ticks: {
                                 beginAtZero:true,
-                                min: <% out.print(minYscale); %>,
+                                min: 20,
                                 max: 70,
                                 fontSize: 13.5
                             },

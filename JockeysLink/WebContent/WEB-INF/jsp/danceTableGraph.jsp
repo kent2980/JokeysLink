@@ -55,7 +55,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 <link rel="shortcut icon" href="/JockeysLink/icon/kyosoba_3.ico">
 <title><%out.print(kyosoTitle); %></title>
 </head>
-<body>
+<body id="dance">
 
 <!-- *****************************************************************************************
      *****************************************************************************************
