@@ -165,7 +165,7 @@ body {
 }
 
 #result .Chart {
-margin: 0.5em 15px 0 auto;
+  margin: 0.5em 15px 0 auto;
 }
 
 .Chart .title {
@@ -548,6 +548,14 @@ table,td {
 
 #logo .title {
     font-size: 0.8em;
+}
+
+#result .sideBy.graph {
+    padding-top: 5.5em;
+    padding-left: 1em;
+	}
+	#dance .Chart {
+    margin: 6em 1em 0 1em;
 }
 
 }

@@ -47,6 +47,7 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 	String netkeibaRaceCode = raceData.getRaceCode().substring(0, 4) + raceData.getRaceCode().substring(8, 16);
 	String netkeiba = "http://race.netkeiba.com/?pid=race&id=c" + netkeibaRaceCode + "&mode=result";
 	String netkeibaOdds = "https://ipat.netkeiba.com/?pid=ipat_input&rid=" + netkeibaRaceCode;
+	String netkeibaHorse = "https://db.netkeiba.com/horse/";//-> 血統登録番号で指定する
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -474,7 +475,7 @@ $(this).replaceWith(video);
 		<td><% out.print(ijoFlag==false?dataSet.getKakuteiChakujun():"-"); %></td>
 		<td class="waku<% out.print(dataSet.getWakuban()); %>"><% out.print(dataSet.getWakuban()); %></td>
 		<td><% out.print(dataSet.getUmaban()); %></td>
-		<td><% out.print(dataSet.getBamei()); %></td>
+		<td><a href="<% out.print(netkeibaHorse + dataSet.getKettoTorokuBango()); %>" target="_blank"><% out.print(dataSet.getBamei()); %></a></td>
 		<td><% out.print(dataSet.getSeibetsu() + dataSet.getBarei()); %></td>
 		<td><% out.print(dataSet.getFutanJuryo()); %></td>
 		<td><% out.print(dataSet.getKishumei().replace("　", "")); %></td>
