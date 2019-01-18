@@ -54,6 +54,9 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 <link href="../css/danceTableGraph.css" rel="stylesheet">
 <link href="/JockeysLink/css/danceTableGraph.css" rel="stylesheet">
 <link rel="shortcut icon" href="/JockeysLink/icon/kyosoba_3.ico">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/pop.js"></script>
+<script type="text/javascript" src="/JockeysLink/js/pop.js"></script>
 <title><%out.print(kyosoTitle); %></title>
 </head>
 <body id="dance">
@@ -347,7 +350,69 @@ function urlJump() {
 	<div class="danceIndex">
 		<div class="tableTitle">
 		<h2>出馬表</h2>
-		<table class="danceTable">
+		
+<div class="hidden_box">
+  <input type="radio" id="a" name="btn" checked="checked"><label for="a">出馬表</label>
+  <input type="radio" id="b" name="btn"><label for="b">過去4走</label>
+  
+  <table class="text kako4sou">
+      <tr>
+        <th>枠番</th>
+        <th>馬番</th>
+        <th>印</th>
+        <th>馬名</th>
+      </tr>
+      			<% for(int i = 0; i < umaNowData.size(); i++){
+					int umaban = i + 1;
+					UmagotoDataSet data = umaNowData.get(i);
+					String kettoTorokuBango = data.getKettoTorokuBango();
+					//枠番が同じ場合に結合を行います
+					int wakuban = data.getWakuban();
+					int previousWakuban = 0;
+					int nextWakuban = 0;
+					int thirdWakuban = 0;
+					if(i > 0)
+						previousWakuban = umaNowData.get(i - 1).getWakuban();
+					try{
+						nextWakuban = umaNowData.get(i + 1).getWakuban();
+						try{
+							thirdWakuban = umaNowData.get(i + 2).getWakuban();
+						}catch(IndexOutOfBoundsException e2){
+							thirdWakuban = 0;
+						}
+					}catch(IndexOutOfBoundsException e){
+						nextWakuban = 0;
+					}
+					String key = (wakuban * wakuban) == (nextWakuban * thirdWakuban) ? " rowspan=\"3\"" : wakuban == nextWakuban ? " rowspan=\"2\"" : "";
+					boolean wakuHantei = wakuban == previousWakuban;
+			%>
+			<tr>
+				<%
+					if(wakuHantei == false){
+				%>
+				<td class="waku<% out.print(data.getWakuban()); %>"<% out.print(key); %>><% out.print(data.getWakuban()==0?"仮":data.getWakuban()); %></td>
+				<%
+					}else{
+						out.print(data.getWakuban()==0?"<td>仮</td>":"");
+					}
+				%>
+				<td><% out.print(data.getUmaban()==0 ? umaban : data.getUmaban()); %></td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left"><a href="<% out.print(netkeibaHorse + data.getKettoTorokuBango()); %>" target="_blank"><% out.print(data.getBamei()); %></a></td>
+				</tr>
+				<%} %>
+    </table>
+		
+		<table class="text danceTable">
 			<tr>
 				<th>枠番</th>
 				<th>馬番</th>
@@ -424,64 +489,7 @@ function urlJump() {
 			<% } %>
 		</table>
 		</div>
-		<div id="index">
-			<h2>展開予想</h2>
-			<div class="data">
-				<h3>隊列</h3>
-				<span><% out.print(indexLoad.getRaceConvoy()); %></span>
-				<h3>ペース</h3>
-				<span><% out.print(indexLoad.getRacePace()); %></span>
-				<h3>逃げ</h3>
-				<span>
-				<%
-					List<String> list1 = analysis.getKyakushitsuLabel(1);
-					for(int i = 0; i < list1.size();i++){
-						out.print(list1.get(i));
-						if(i + 1 < list1.size()){
-							out.print("、");
-						}
-					}
-				%>
-				</span>
-				<h3>先行</h3>
-				<span>
-				<%
-					List<String> list2 = analysis.getKyakushitsuLabel(2);
-					for(int i = 0; i < list2.size();i++){
-						out.print(list2.get(i));
-						if(i + 1 < list2.size()){
-							out.print("、");
-						}
-					}
-				%>
-				</span>
-				<h3>差し</h3>
-				<span>
-				<%
-					List<String> list3 = analysis.getKyakushitsuLabel(3);
-					for(int i = 0; i < list3.size();i++){
-						out.print(list3.get(i));
-						if(i + 1 < list3.size()){
-							out.print("、");
-						}
-					}
-				%>
-				</span>
-				<h3>追込み</h3>
-				<span>
-				<%
-					List<String> list4 = analysis.getKyakushitsuLabel(4);
-					for(int i = 0; i < list4.size();i++){
-						out.print(list4.get(i));
-						if(i + 1 < list4.size()){
-							out.print("、");
-						}
-					}
-				%>
-				</span>
-	    	</div>
-    	</div>
-	</div>
 
+</div>
 </body>
 </html>
