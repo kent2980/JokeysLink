@@ -194,6 +194,47 @@ body {
     margin-bottom: 1.5em;
     height: 420px;
 }
+
+/********************************************************
+********	過去４走成績表を作ります(*^▽^*)		*********
+*********************************************************/
+
+.hidden_box {
+    margin: 2em 0;/*前後の余白*/
+    padding: 0;
+}
+
+/*ボタン装飾*/
+.hidden_box label {
+		margin: 0 0.5em;
+    padding: 15px;
+    font-weight: bold;
+    border: solid 2px black;
+    cursor :pointer;
+}
+
+/*ボタンホバー時*/
+.hidden_box label:hover {
+    background: #efefef;
+}
+
+/*チェックは見えなくする*/
+.hidden_box input {
+	display: none;
+}
+
+.text {
+	display: none;
+}
+
+.danceTable {
+	display:table;
+}
+
+input[type="radio"]:checked + label{
+	background-color: rgb(74, 74, 74);
+	color: rgb(255, 255, 255);
+}
 /********************************************************
 ********	テーブル部のスタイルを作ります。(*^▽^*)		*********
 *********************************************************/
@@ -212,16 +253,15 @@ th,td {
 
 .danceIndex {
 	display: flex;
-	width: 100%;
-
 }
 
 .tableTitle {
-	margin: 0 0 2em 2em;
-		width: 180%;
+    margin: auto;
+    width: 80%;
 }
 
-.danceTable {
+.danceIndex table {
+	margin-top: 3em;
 	width: 100%;
 }
 
